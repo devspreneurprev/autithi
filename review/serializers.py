@@ -1,3 +1,17 @@
 from rest_framework.serializers import ModelSerializer
 
-from django.contrib.contenttypes.models import ContentType
+from .models import Review
+
+class ReviewListSerializer(ModelSerializer):
+	class Meta:
+
+		model = Review
+		fields = [
+		'trip',
+		'user_review',
+		'user_score',
+
+ 
+
+
+		]

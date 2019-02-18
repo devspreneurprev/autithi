@@ -4,8 +4,12 @@ from .models import City
 
 class CityListSerializer(ModelSerializer):
 	class Meta:
-		models = City
+		model = City
 		fields =[
+		'id',
+		'name',
+		'image',
+		'description'
 
 
 

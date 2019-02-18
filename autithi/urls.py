@@ -19,9 +19,12 @@ from rest_framework_jwt.views import verify_jwt_token
 from django.contrib import admin
 from django.urls import include, path
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('accounts.urls')),
+    path('api/', include('city.urls')),
+    path('api/', include('review.urls')),
     path('api/token/auth/', obtain_jwt_token),
     path('api/token/refresh/', refresh_jwt_token),
     path('api/token/verify/', verify_jwt_token),
