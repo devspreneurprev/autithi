@@ -111,7 +111,8 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['username', 'full_name']
 
     def __str__(self):
-        return str(self.username)
+        print(self.username)
+        return self.username
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -131,7 +132,7 @@ class Guest(models.Model):
     updated_at = models.DateField(auto_now=True,)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Host(models.Model):
@@ -141,4 +142,4 @@ class Host(models.Model):
     updated_at = models.DateField(auto_now=True,)
 
     def __str__(self):
-        return self.user
+        return self.user.username
