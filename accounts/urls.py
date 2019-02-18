@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib import admin
 
-from .api_views import (
+from .views import (
     UserCreateAPIView,
     UserLoginAPIView
 )
