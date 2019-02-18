@@ -11,8 +11,4 @@ class ReviewListSerializer(ModelSerializer):
             'trip',
             'user_review',
             'user_score',
-
-
-
-
         ]

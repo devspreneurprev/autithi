@@ -23,15 +23,12 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('accounts.urls')),
-<<<<<<< HEAD
     path('api/', include('city.urls')),
     path('api/', include('review.urls')),
-=======
     path('city/', include('city.urls')),
     path('property/', include('property.urls')),
     path('review/', include('review.urls')),
     path('trip/', include('trip.urls')),
->>>>>>> 9d11ff4c22cddaa12f123e7190c95d519dee348d
     path('api/token/auth/', obtain_jwt_token),
     path('api/token/refresh/', refresh_jwt_token),
     path('api/token/verify/', verify_jwt_token),
