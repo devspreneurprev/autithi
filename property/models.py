@@ -42,7 +42,7 @@ class PropartyImage(models.Model):
     proparty = models.ForeignKey(Proparty, on_delete=models.CASCADE)
     caption = models.TextField()
     image = models.ImageField(upload_to=upload_location, null=True,
-                              blank=True, width_field="width_field", height_field="height_field")
+                              blank=True, )
     created_at = models.DateField(auto_now_add=True,)
     updated_at = models.DateField(auto_now=True,)
 

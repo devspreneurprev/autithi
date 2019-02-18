@@ -5,14 +5,14 @@ from .models import Proparty, PropartyImage
 
 class PropartyDetailSerializer(ModelSerializer):
     class Meta:
-        model = [Proparty, PropartyImage]
+        model = Proparty
         fields = (
             'host',
             'city',
             'title',
             'slug',
             'description',
-            'cost_per_unit'
+            'cost_per_unit',
             'place_type',
             'rental_type',
             'house_rules',
@@ -25,14 +25,14 @@ class PropartyDetailSerializer(ModelSerializer):
             'created_at',
             'updated_at',
             # 'proparty',
-            'caption',
+            # 'caption',
             # 'image',
             # 'created_at',
             # 'updated_at',
         )
 class PropartyListSerializer(ModelSerializer):
     class Meta:
-        model = [Proparty, PropartyImage]
+        model = Proparty
         fields =(
             'title',
         )
