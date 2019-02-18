@@ -131,7 +131,7 @@ class Guest(models.Model):
     updated_at = models.DateField(auto_now=True,)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Host(models.Model):
@@ -141,4 +141,4 @@ class Host(models.Model):
     updated_at = models.DateField(auto_now=True,)
 
     def __str__(self):
-        return self.user
+        return self.user.username

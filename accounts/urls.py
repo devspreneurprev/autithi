@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from django.contrib import admin
 
 from .views import (
@@ -7,6 +7,6 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^login/$', UserLoginAPIView.as_view(), name='login'),
-    url(r'^register/$', UserCreateAPIView.as_view(), name='register'),
+    path('login/', UserLoginAPIView.as_view(), name='login'),
+    path('register/', UserCreateAPIView.as_view(), name='register'),
 ]

@@ -19,4 +19,4 @@ class Trip(models.Model):
     updated_at = models.DateField(auto_now=True,)
 
     def __str__(self):
-        return self.guest
+        return self.guest.username

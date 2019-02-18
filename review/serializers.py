@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
+<<<<<<< HEAD
 from .models import Review
 
 class ReviewListSerializer(ModelSerializer):
@@ -15,3 +16,5 @@ class ReviewListSerializer(ModelSerializer):
 
 
 		]
+=======
+>>>>>>> 9d11ff4c22cddaa12f123e7190c95d519dee348d
