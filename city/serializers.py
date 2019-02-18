@@ -1,3 +1,8 @@
 from rest_framework.serializers import ModelSerializer
 
-from django.contrib.contenttypes.models import ContentType
+from .models import City
+
+class CityListSerializer(ModelSerializer):
+	class Meta:
+		models = 
+			
