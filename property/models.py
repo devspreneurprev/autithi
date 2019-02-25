@@ -24,11 +24,10 @@ class Proparty(models.Model):
     accommodates = models.CharField(max_length=255,)
     times_viewed = models.IntegerField()
     is_booked = models.BooleanField(default=False)
-    booked_from_date = models.DateField(auto_now=True)
-    booked_to_date = models.DateField(auto_now=True)
+    booked_from_date = models.DateField(auto_now_add=True)
+    booked_to_date = models.DateField(auto_now_add=True)
     created_at = models.DateField(auto_now_add=True,)
     updated_at = models.DateField(auto_now=True,)
-
 
     def __str__(self):
         return self.title
