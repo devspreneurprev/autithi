@@ -9,5 +9,5 @@ from django.urls import path
 from django.contrib import admin
 
 urlpatterns = [
-    path('reviewlist/', ReviewListApiView.as_view())
+    path('', ReviewListApiView.as_view())
 ]

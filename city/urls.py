@@ -8,6 +8,6 @@ from django.contrib import admin
 from .views import CityListApiView
 
 urlpatterns = [
-    path('citylist/', CityListApiView.as_view())
+    path('', CityListApiView.as_view())
 
 ]

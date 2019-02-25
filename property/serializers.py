@@ -10,7 +10,6 @@ class PropartyDetailSerializer(ModelSerializer):
             'host',
             'city',
             'title',
-            'slug',
             'description',
             'cost_per_unit',
             'place_type',
