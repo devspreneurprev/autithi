@@ -7,7 +7,7 @@ import datetime
 
 # User import
 from city.models import City
-
+from autithi.utils.location import upload_location
 
 EMAIL_REGEX = '^[a-z0-9.@]*$'
 
@@ -48,15 +48,6 @@ class UserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
-
-
-def upload_location(instance, filename):
-    PostModel = instance.__class__
-    try:
-        new_id = PostModel.objects.order_by("id").last().id + 1
-    except AttributeError:  # no folder in database
-        new_id = 1
-    return "%s/%s" % (new_id, filename)
 
 
 class User(AbstractBaseUser):
@@ -122,16 +113,6 @@ class User(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
-
-
-class Guest(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,)
-    about = models.TextField()
-    created_at = models.DateField(auto_now_add=True,)
-    updated_at = models.DateField(auto_now=True,)
-
-    def __str__(self):
-        return self.user.username
 
 
 class Host(models.Model):

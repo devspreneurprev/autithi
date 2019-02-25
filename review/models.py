@@ -1,11 +1,13 @@
 from django.db import models
 
-from trip.models import Trip
+from property.models import Proparty
+from accounts.models import User
 # Create your models here.
 
 
 class Review(models.Model):
-    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    trip = models.ForeignKey(Proparty, on_delete=models.CASCADE)
     user_review = models.TextField()
     user_score = models.IntegerField()
     property_review = models.TextField()

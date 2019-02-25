@@ -5,4 +5,3 @@ def upload_location(instance, filename):
     except AttributeError:  # no folder in database
         new_id = 1
     return "%s/%s" % (new_id, filename)
-    

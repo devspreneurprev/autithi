@@ -3,6 +3,7 @@ from django.db import models
 # User import
 from accounts.models import Host
 from city.models import City
+from autithi.utils.location import upload_location
 # Create your models here.
 
 
@@ -22,20 +23,15 @@ class Proparty(models.Model):
     number_of_bathrooms = models.IntegerField()
     accommodates = models.CharField(max_length=255,)
     times_viewed = models.IntegerField()
+    is_booked = models.BooleanField(default=False)
+    booked_from_date = models.DateField(auto_now=True)
+    booked_to_date = models.DateField(auto_now=True)
     created_at = models.DateField(auto_now_add=True,)
     updated_at = models.DateField(auto_now=True,)
 
+
     def __str__(self):
         return self.title
-
-
-def upload_location(instance, filename):
-    PostModel = instance.__class__
-    try:
-        new_id = PostModel.objects.order_by("id").last().id + 1
-    except AttributeError:  # no folder in database
-        new_id = 1
-    return "%s/%s" % (new_id, filename)
 
 
 class PropartyImage(models.Model):
