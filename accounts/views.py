@@ -10,7 +10,7 @@ from .serializers import (
 from rest_framework.generics import (
     CreateAPIView, UpdateAPIView, RetrieveAPIView, UpdateAPIView)
 from rest_framework.views import APIView
-from rest_framework.permissions import (AllowAny)
+from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
@@ -28,7 +28,7 @@ class UserDetailAPIView(RetrieveAPIView):
     serializer_class = UserDetailSerializer
     lookup_field = 'username'
     # queryset = User.objects.filter(username=request.username)
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, *args, **kwargs):
         # request = self.request
@@ -60,7 +60,7 @@ class UserLoginAPIView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
-        # print("in Login view -> ", data)
+        print("in Login view -> ", data)
         serializer = UserLoginSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             new_data = serializer.data
