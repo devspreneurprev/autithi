@@ -101,4 +101,5 @@ class UserLoginSerializer(ModelSerializer):
         }
 
     def validate(self, data):
+        print("in Login serializers -> ", data)
         return data
