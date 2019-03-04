@@ -7,7 +7,7 @@ import datetime
 
 # User import
 from city.models import City
-from autithi.utils.location import upload_location
+from autithi.utils.upload_location import upload_image_path
 
 EMAIL_REGEX = '^[a-z0-9.@]*$'
 
@@ -81,13 +81,13 @@ class User(AbstractBaseUser):
     date_of_birth = models.DateField()
     phone_number = models.CharField(max_length=255,)
     zipcode = models.CharField(max_length=120, default="1000",)
-    profile_image = models.ImageField(upload_to=upload_location, null=True,
+    profile_image = models.ImageField(upload_to=upload_image_path, null=True,
                                       blank=True, width_field="width_field", height_field="height_field")
     description = models.TextField(max_length=255,)
     profession = models.CharField(max_length=255,)
-    id_image1 = models.ImageField(upload_to=upload_location, null=True,
+    id_image1 = models.ImageField(upload_to=upload_image_path, null=True,
                                   blank=True, width_field="width_field", height_field="height_field")
-    id_imege2 = models.ImageField(upload_to=upload_location, null=True,
+    id_imege2 = models.ImageField(upload_to=upload_image_path, null=True,
                                   blank=True, width_field="width_field", height_field="height_field")
     id_type = models.IntegerField(
         blank=True, null=True)  # 1=NID, 2=PID, 3=DL_ID
