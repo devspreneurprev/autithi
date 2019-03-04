@@ -34,4 +34,42 @@ class PropartyListSerializer(ModelSerializer):
         model = Proparty
         fields =(
             'title',
+            'host',
+            'city',
+            'description',
+            'cost_per_unit',
+            'place_type',
+            'rental_type',
+            'house_rules',
+            'cancellation_policy',
+            'amenities',
+            'number_of_badrooms',
+            'number_of_bathrooms',
+            'accommodates',
+            'times_viewed',
+            'created_at',
+            'updated_at',
+
         )
+
+class PropartyCreateUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = Proparty
+        fields = [
+            'title',
+            'host',
+            'city',
+            'description',
+            'cost_per_unit',
+            'place_type',
+            'rental_type',
+            'house_rules',
+            'cancellation_policy',
+            'amenities',
+            'number_of_badrooms',
+            'number_of_bathrooms',
+            'accommodates',
+            'times_viewed',
+            'created_at',
+            'updated_at',
+        ]        
