@@ -143,3 +143,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+'''
+every time run it 
+Remove-item alias:curl
+'''
+
+'''
+curl -X POST -d "email=nayan@gmail.com&password=nayan" http://127.0.0.1:8000/api/auth/token/
+curl -X POST -H "Content-Type: application/json" -d '{"email":"nayan@gmail.com","password":"nayan"}' http://127.0.0.1:8000/api/auth/token/
+curl -H 'Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6Im5heWFuQGdtYWlsLmNvbSIsImV4cCI6MTU1MTY5Mzc1MCwiZW1haWwiOiJuYXlhbkBnbWFpbC5jb20ifQ.VPYP0Fkc3GcSFxSWTuYhCogk7RU7eCb1NkEDAwrwsrU' http://127.0.0.1::8000/api/user/nayangmail.com/
+curl http://127.0.0.1:8000/api/user/nayangmail.com/
+'''

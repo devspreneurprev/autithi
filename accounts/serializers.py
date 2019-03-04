@@ -1,6 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-
-from .models import User
 from rest_framework.serializers import (
     CharField,
     EmailField,
@@ -10,13 +8,22 @@ from rest_framework.serializers import (
     ValidationError
 )
 
+from .models import User
+from autithi.utils.make_unique_username import create_username
+
 
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = (
             'email',
+            'username',
             'full_name',
+            'date_of_birth',
+            'phone_number',
+            'zipcode',
+            'created_at',
+            'updated_at',
         )
 
 
@@ -80,9 +87,23 @@ class UserCreateSerializer(ModelSerializer):
         return validated_data
 
 
-def create_username(email):
-    email = email.replace("@", "")
-    return email
+class UserUpdateSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'username',
+            'full_name',
+        )
+
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get('email', instance.email)
+        instance.username = validated_data.get('username', instance.username)
+        instance.full_name = validated_data.get(
+            'full_name', instance.full_name)
+        instance.save()
+        return instance
 
 
 class UserLoginSerializer(ModelSerializer):

@@ -3,7 +3,7 @@ from django.db import models
 # User import
 from accounts.models import Host
 from city.models import City
-from autithi.utils.location import upload_location
+from autithi.utils.upload_location import upload_image_path
 # Create your models here.
 
 
@@ -36,7 +36,7 @@ class Proparty(models.Model):
 class PropartyImage(models.Model):
     proparty = models.ForeignKey(Proparty, on_delete=models.CASCADE)
     caption = models.TextField()
-    image = models.ImageField(upload_to=upload_location, null=True,
+    image = models.ImageField(upload_to=upload_image_path, null=True,
                               blank=True, )
     created_at = models.DateField(auto_now_add=True,)
     updated_at = models.DateField(auto_now=True,)
