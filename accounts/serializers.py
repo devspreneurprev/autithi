@@ -85,16 +85,28 @@ class UserCreateSerializer(ModelSerializer):
         user_obj.save()
         return validated_data
 
-    def update(self, instance, validated_data):
-        instance.email = validated_data.get('email', instance.email)
-        instance.content = validated_data.get('content', instance.content)
-        instance.created = validated_data.get('created', instance.created)
-        return instance
-
 
 def create_username(email):
     email = email.replace("@", "")
     return email
+
+
+class UserUpdateSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'username',
+            'full_name',
+        )
+
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get('email', instance.email)
+        instance.username = validated_data.get('username', instance.username)
+        instance.full_name    = validated_data.get('full_name', instance.full_name)
+        instance.save()
+        return instance
 
 
 class UserLoginSerializer(ModelSerializer):

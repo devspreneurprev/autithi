@@ -5,9 +5,10 @@ from .serializers import (
     UserCreateSerializer,
     UserLoginSerializer,
     UserDetailSerializer,
+    UserUpdateSerializer,
 )
 from rest_framework.generics import (
-    CreateAPIView, UpdateAPIView, RetrieveAPIView)
+    CreateAPIView, UpdateAPIView, RetrieveAPIView, UpdateAPIView)
 from rest_framework.views import APIView
 from rest_framework.permissions import (AllowAny)
 from rest_framework.response import Response
@@ -32,15 +33,14 @@ class UserDetailAPIView(RetrieveAPIView):
     def get_object(self, *args, **kwargs):
         # request = self.request
         username = self.kwargs.get("username")
-        instance = User.objects.filter(username=username)
-        if instance == None or instance.count() != 1:
+        instance = User.objects.get_by_username(username)
+        if instance == None:
             raise Http404("Product doesn't exist and this is a bad request")
-        instance = User.objects.get(username=username)
         return instance
 
 
-class UserUpdateAPIView(RetrieveAPIView):
-    serializer_class = UserCreateSerializer
+class UserUpdateAPIView(UpdateAPIView):
+    serializer_class = UserUpdateSerializer
     lookup_field = 'username'
     # queryset = User.objects.filter(username=request.username)
     permission_classes = [AllowAny]
