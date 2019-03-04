@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, Http404
 
 # Create your views here.
 from .serializers import (
     UserCreateSerializer,
     UserLoginSerializer,
+    UserDetailSerializer,
 )
-from rest_framework.generics import (CreateAPIView)
+from rest_framework.generics import (
+    CreateAPIView, UpdateAPIView, RetrieveAPIView)
 from rest_framework.views import APIView
 from rest_framework.permissions import (AllowAny)
 from rest_framework.response import Response
@@ -19,6 +21,37 @@ class UserRegisterAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
     queryset = User.objects.all()
     permission_classes = [AllowAny]
+
+
+class UserDetailAPIView(RetrieveAPIView):
+    serializer_class = UserDetailSerializer
+    lookup_field = 'username'
+    # queryset = User.objects.filter(username=request.username)
+    permission_classes = [AllowAny]
+
+    def get_object(self, *args, **kwargs):
+        # request = self.request
+        username = self.kwargs.get("username")
+        instance = User.objects.filter(username=username)
+        if instance == None or instance.count() != 1:
+            raise Http404("Product doesn't exist and this is a bad request")
+        instance = User.objects.get(username=username)
+        return instance
+
+
+class UserUpdateAPIView(RetrieveAPIView):
+    serializer_class = UserCreateSerializer
+    lookup_field = 'username'
+    # queryset = User.objects.filter(username=request.username)
+    permission_classes = [AllowAny]
+
+    def get_object(self, *args, **kwargs):
+        # request = self.request
+        username = self.kwargs.get("username")
+        instance = User.objects.get_by_username(username)
+        if instance == None:
+            raise Http404("Product doesn't exist and this is a bad request")
+        return instance
 
 
 class UserLoginAPIView(APIView):

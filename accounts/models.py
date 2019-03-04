@@ -12,7 +12,13 @@ from autithi.utils.location import upload_location
 EMAIL_REGEX = '^[a-z0-9.@]*$'
 
 
-class UserManager(BaseUserManager):
+class UserManager(BaseUserManager, models.Manager):
+    def get_by_username(self, username):
+        qs = self.get_queryset().filter(username=username)
+        if qs.count() == 1:
+            return qs.first()
+        return None
+
     def create_user(self, email, username, full_name, date_of_birth, password=None):
         """
         Creates and saves a User with the given email, date of

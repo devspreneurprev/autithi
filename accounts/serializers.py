@@ -16,7 +16,13 @@ class UserDetailSerializer(ModelSerializer):
         model = User
         fields = (
             'email',
+            'username',
             'full_name',
+            'date_of_birth',
+            'phone_number',
+            'zipcode',
+            'created_at',
+            'updated_at',
         )
 
 
@@ -78,6 +84,12 @@ class UserCreateSerializer(ModelSerializer):
         user_obj.set_password(password)
         user_obj.save()
         return validated_data
+
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get('email', instance.email)
+        instance.content = validated_data.get('content', instance.content)
+        instance.created = validated_data.get('created', instance.created)
+        return instance
 
 
 def create_username(email):
