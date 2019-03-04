@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+from .models import Proparty
 
 class IsPropertyOwner(permissions.BasePermission):
 
