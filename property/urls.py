@@ -15,8 +15,4 @@ urlpatterns = [
     path('<pk>/delete/',PropertyDeleteAPIView.as_view()),
     path('<pk>/update/',PropertyUpdateAPIView.as_view()),
     path('<slug>/', PropartyDetailAPIView.as_view()),
-
-
-
-
 ]
