@@ -13,7 +13,7 @@ EMAIL_REGEX = '^[a-z0-9.@]*$'
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, username, full_name, date_of_birth, password=None):
+    def create_user(self, email, username, date_of_birth, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -24,7 +24,6 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
-            full_name=full_name,
             date_of_birth=date_of_birth,
         )
 
@@ -32,7 +31,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, full_name, password):
+    def create_superuser(self, email, username, password):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -41,7 +40,6 @@ class UserManager(BaseUserManager):
             email,
             username,
             password=password,
-            full_name=full_name,
             date_of_birth=datetime.datetime(1996, 7, 27),
         )
         user.is_staff = True
@@ -58,7 +56,7 @@ class User(AbstractBaseUser):
     c = City(name='unknown city', description='unknown city', views=0)
     c.save()
     '''
-    full_name = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -99,7 +97,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'full_name']
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.username
