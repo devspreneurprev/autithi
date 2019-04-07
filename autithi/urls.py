@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
@@ -22,14 +24,18 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('api/admin/', admin.site.urls),
     path('api/user/', include('accounts.urls')),
     path('api/city/', include('city.urls')),
     path('api/review/', include('review.urls')),
     path('api/city/', include('city.urls')),
     path('api/property/', include('property.urls')),
     path('api/trip/', include('trip.urls')),
-    path('api/auth/token/', obtain_jwt_token),
-    path('api/refresh/token/', refresh_jwt_token),
-    path('api/verify/token/', verify_jwt_token),
+    path('api/token/auth/', obtain_jwt_token),
+    path('api/token/refresh/', refresh_jwt_token),
+    path('api/token/verify/', verify_jwt_token),
 ]
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)

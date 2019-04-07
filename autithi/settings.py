@@ -47,11 +47,13 @@ INSTALLED_APPS = [
     
     # third party app
     'rest_framework',
+    'corsheaders',
 ]
 AUTH_USER_MODEL = 'accounts.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -129,9 +131,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
+
+
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media", "media_root")
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -143,14 +151,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
-'''
-every time run it 
-Remove-item alias:curl
-'''
 
-'''
-curl -X POST -d "email=nayan@gmail.com&password=nayan" http://127.0.0.1:8000/api/auth/token/
-curl -X POST -H "Content-Type: application/json" -d '{"email":"nayan@gmail.com","password":"nayan"}' http://127.0.0.1:8000/api/auth/token/
-curl -H 'Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6Im5heWFuQGdtYWlsLmNvbSIsImV4cCI6MTU1MTY5Mzc1MCwiZW1haWwiOiJuYXlhbkBnbWFpbC5jb20ifQ.VPYP0Fkc3GcSFxSWTuYhCogk7RU7eCb1NkEDAwrwsrU' http://127.0.0.1::8000/api/user/nayangmail.com/
-curl http://127.0.0.1:8000/api/user/nayangmail.com/
-'''
+CORS_ORIGIN_ALLOW_ALL=True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+)
