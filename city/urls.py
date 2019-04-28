@@ -5,9 +5,9 @@ from django.urls import path
 
 from django.contrib import admin
 
-from .views import CityListApiView
+from .views import CityListApiView,CityDetailsApiView
 
 urlpatterns = [
-    path('', CityListApiView.as_view())
-
+    path('', CityListApiView.as_view()),
+    path('<pk>/', CityDetailsApiView.as_view()),
 ]

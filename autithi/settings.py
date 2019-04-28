@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'property',
     'review',
     'trip',
+    'recommendation',
 
     
     # third party app

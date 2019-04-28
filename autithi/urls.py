@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/user/', include('accounts.urls')),
     path('api/city/', include('city.urls')),
     path('api/review/', include('review.urls')),
+    path('api/recommendation/', include('recommendation.urls')),
     path('api/city/', include('city.urls')),
     path('api/property/', include('property.urls')),
     path('api/trip/', include('trip.urls')),
