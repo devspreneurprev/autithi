@@ -35,15 +35,15 @@ class PropartyListAPIView(ListAPIView):
     #     print("get -> ", request.GET.get("foo"))
     #     return Response(queryset)
 
-    def get_queryset(self):
-        token = self.request.GET.get("foo")
-        decodedPayload = jwt.decode(token,None,None)
-        print("get_queryset -> ", token , "\n", decodedPayload,"\n\n")
-        queryset = Proparty.objects.all()
-        return queryset
+    # def get_queryset(self):
+    #     token = self.request.GET.get("foo")
+    #     decodedPayload = jwt.decode(token,None,None)
+    #     print("get_queryset -> ", token , "\n", decodedPayload,"\n\n")
+    #     queryset = Proparty.objects.all()
+    #     return queryset
 
     serializer_class = PropartyListSerializer
-    # queryset = Proparty.objects.all()
+    queryset = Proparty.objects.all()
     permission_classes = [AllowAny]
 
 

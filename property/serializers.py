@@ -26,8 +26,8 @@ class PropartyDetailSerializer(ModelSerializer):
             # 'proparty',
             # 'caption',
             # 'image',
-            # 'created_at',
-            # 'updated_at',
+            'created_at',
+            'updated_at',
         )
 
 

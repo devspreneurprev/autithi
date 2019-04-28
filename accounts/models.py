@@ -73,16 +73,12 @@ class User(AbstractBaseUser):
     date_of_birth = models.DateField()
     phone_number = models.CharField(max_length=255,)
     zipcode = models.CharField(max_length=120, default="1000",)
-    profile_image = models.ImageField(upload_to=upload_location, null=True,
-                                      blank=True, width_field="width_field", height_field="height_field")
+    profile_image = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
     description = models.TextField(max_length=255,)
     profession = models.CharField(max_length=255,)
-    id_image1 = models.ImageField(upload_to=upload_location, null=True,
-                                  blank=True, width_field="width_field", height_field="height_field")
-    id_imege2 = models.ImageField(upload_to=upload_location, null=True,
-                                  blank=True, width_field="width_field", height_field="height_field")
-    id_type = models.IntegerField(
-        blank=True, null=True)  # 1=NID, 2=PID, 3=DL_ID
+    id_image1 = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
+    id_imege2 = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
+    id_type = models.IntegerField(blank=True, null=True)  # 1=NID, 2=PID, 3=DL_ID
     facebook = models.CharField(max_length=255,)
     twitter = models.CharField(max_length=255,)
     linkedin = models.CharField(max_length=255,)
