@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .models import Booking
 from property.models import Proparty
 from accounts.models import User
+from trip.models import Trip
 
 class BookingRequestAPIView(APIView):
     # serializer_class = PropartyListSerializer
@@ -52,3 +53,17 @@ class BookingAcceptedAPIView(APIView):
 
 class BookingCancelingAPIView(APIView):
     permission_classes = [AllowAny]
+        
+    def get(self,request):
+        booking_id=request.GET.get("booking_id")
+        booking_instance = Booking.objects.get(id=booking_id)
+        
+        booking_instance.requested_by_user=False
+        booking_instance.request_accepted_by_host=False
+
+        trip_instance = Trip.objects.get(booking=booking_instance)
+        trip_instance.confirm=False
+
+        return Response(" Cancel confirm ")
+        
+
