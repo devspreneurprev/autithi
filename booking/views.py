@@ -11,7 +11,7 @@ class BookingRequestAPIView(APIView):
     # queryset = Proparty.objects.all()
     permission_classes = [AllowAny]
 
-
+    # paramiter = (proparty_id, begin_date, end_date, user)
     def get(self, request):
         print("annonimous\n\n\n")
         queryset = Booking.objects.all()
@@ -43,6 +43,12 @@ class BookingRequestAPIView(APIView):
 
 class BookingAcceptedAPIView(APIView):
     permission_classes = [AllowAny]
+
+    # paramiter = (proparty_id, begin_date, end_date, user=host)
+    def get(self, request):
+        booking_id = request.GET.get("booking_id")
+        booking = Booking.objects.get(id=booking_id)
+
 
 class BookingCancelingAPIView(APIView):
     permission_classes = [AllowAny]
