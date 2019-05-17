@@ -5,33 +5,36 @@ from rest_framework.response import Response
 from .models import Booking
 from property.models import Proparty
 from accounts.models import User
+from trip.models import Trip
+
 
 class BookingRequestAPIView(APIView):
     # serializer_class = PropartyListSerializer
     # queryset = Proparty.objects.all()
     permission_classes = [AllowAny]
 
-    # paramiter = (proparty_id, begin_date, end_date, user)
+    # parameter = (proparty_id, begin_date, end_date, user)
     def get(self, request):
         print("annonimous\n\n\n")
         queryset = Booking.objects.all()
         proparty_id = self.request.GET.get("proparty_id")
         # proparty_title = self.request.GET.get("proparty_title")
-        print("\n\nid ->",proparty_id, "annonimous\n\n\n")
+        print("\n\nid ->", proparty_id, "annonimous\n\n\n")
         user = User.objects.get(email="nayan32biswas@gmail.com")
-        print("before condition ",user, "\n\n")
+        print("before condition ", user, "\n\n")
         if user is not None:
-            print("after authentication",user)
+            print("after authentication", user)
             if proparty_id is not None:
                 proparty = Proparty.objects.get(id=proparty_id)
-                print(proparty.title,"\n\n")
+                print(proparty.title, "\n\n")
                 # if proparty.count()==1:
                 print("proparty found\n\n")
                 host = proparty.host
                 print("host is -> ", host)
                 # if host.count()==1:
-                booking_instance = Booking.objects.create(user=user, proparty=proparty, host=host)
-                    # here notify the host
+                booking_instance = Booking.objects.create(
+                    user=user, proparty=proparty, host=host)
+                # here notify the host
         else:
             # redirect to login page
             pass
@@ -41,13 +44,24 @@ class BookingRequestAPIView(APIView):
     def post(self, request):
         print("post")
 
+
 class BookingAcceptedAPIView(APIView):
     permission_classes = [AllowAny]
 
-    # paramiter = (proparty_id, begin_date, end_date, user=host)
+    # parameter = (booking, )
     def get(self, request):
         booking_id = request.GET.get("booking_id")
-        booking = Booking.objects.get(id=booking_id)
+        try:
+            booking_instance = Booking.objects.get(id=booking_id)
+            Trip.objects.create(
+                proparty=booking_instance.proparty,
+                host=booking_instance.proparty.host,
+                begin_date=booking_instance.begin_date,
+                end_date=booking_instance.end_date,
+                booking_instance=booking_instance
+            )
+        except:
+            return "error"
 
 
 class BookingCancelingAPIView(APIView):
