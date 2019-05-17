@@ -36,7 +36,7 @@ class BookingRequestAPIView(APIView):
             # redirect to login page
             pass
 
-        return Response("Booking")
+        return Response("Booking completed. Please wait for confirmation")
 
     def post(self, request):
         print("post")
