@@ -6,10 +6,7 @@ from .models import Booking
 from property.models import Proparty
 from accounts.models import User
 from trip.models import Trip
-<<<<<<< HEAD
-=======
 
->>>>>>> 7a9f8f09028d0a90c00d97a597d8c06ffb2bd0db
 
 class BookingRequestAPIView(APIView):
     # serializer_class = PropartyListSerializer
@@ -54,32 +51,37 @@ class BookingAcceptedAPIView(APIView):
     # parameter = (booking, )
     def get(self, request):
         booking_id = request.GET.get("booking_id")
+
         try:
             booking_instance = Booking.objects.get(id=booking_id)
+
+            print("", booking_instance)
+
             Trip.objects.create(
-                proparty=booking_instance.proparty,
-                host=booking_instance.proparty.host,
                 begin_date=booking_instance.begin_date,
                 end_date=booking_instance.end_date,
-                booking_instance=booking_instance
+                booking=booking_instance
             )
+            return Response("booking accepted")
         except:
-            return "error"
+            return Response("booking error")
 
 
 class BookingCancelingAPIView(APIView):
     permission_classes = [AllowAny]
-        
-    def get(self,request):
-        booking_id=request.GET.get("booking_id")
+
+    def get(self, request):
+        booking_id = request.GET.get("booking_id")
         booking_instance = Booking.objects.get(id=booking_id)
-        
-        booking_instance.requested_by_user=False
-        booking_instance.request_accepted_by_host=False
+
+        booking_instance.requested_by_user = False
+        booking_instance.request_accepted_by_host = False
+        booking_instance.save()
 
         trip_instance = Trip.objects.get(booking=booking_instance)
-        trip_instance.confirm=False
+        trip_instance.confirmed = False
+        trip_instance.save()
+
+        print(trip_instance.confirmed)
 
         return Response(" Cancel confirm ")
-        
-

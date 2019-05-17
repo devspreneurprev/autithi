@@ -5,5 +5,4 @@ urlpatterns = [
     path('request/', BookingRequestAPIView.as_view()),
     path('request_cancel/', BookingCancelingAPIView.as_view()),
     path('request_accepted/', BookingAcceptedAPIView.as_view())
-
 ]
