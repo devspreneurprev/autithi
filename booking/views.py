@@ -2,6 +2,7 @@ import datetime
 from rest_framework.views import APIView
 from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from rest_framework.response import Response
+from django.http import JsonResponse
 
 from .models import Booking
 from property.models import Proparty
@@ -140,3 +141,18 @@ class BookingCancelingAPIView(APIView):
         print(trip_instance.confirmed)
 
         return Response(" Cancel confirm ")
+
+
+class BookingDateAPIView(APIView):
+    permission_classes = [AllowAny]
+    # parameter = (proparty_id)
+
+    def get(self, request):
+        proparty_id = self.request.GET.get("proparty_id")
+        booking_instance = Booking.objects.filter(proparty=proparty_id, request_accepted_by_host=True)
+        booking_date_list = []
+        print(booking_instance)
+        for booking in booking_instance:
+            booking_date_list.append((booking.begin_date, booking.end_date))
+        print(booking_date_list)
+        return JsonResponse({'foo': booking_date_list})
