@@ -54,17 +54,16 @@ class BookingAcceptedAPIView(APIView):
 
         try:
             booking_instance = Booking.objects.get(id=booking_id)
-
-            print("", booking_instance)
-
-            Trip.objects.create(
+            trip_instance, trip_created = Trip.objects.get_or_create(
                 begin_date=booking_instance.begin_date,
                 end_date=booking_instance.end_date,
                 booking=booking_instance
             )
+            if trip_created is not True:
+                return Response("alrady created")
             return Response("booking accepted")
         except:
-            return Response("booking error")
+            return Response("booking  error")
 
 
 class BookingCancelingAPIView(APIView):
@@ -72,11 +71,12 @@ class BookingCancelingAPIView(APIView):
 
     def get(self, request):
         booking_id = request.GET.get("booking_id")
+        
         booking_instance = Booking.objects.get(id=booking_id)
-
         booking_instance.requested_by_user = False
         booking_instance.request_accepted_by_host = False
         booking_instance.save()
+
 
         trip_instance = Trip.objects.get(booking=booking_instance)
         trip_instance.confirmed = False
