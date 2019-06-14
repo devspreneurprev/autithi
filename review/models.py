@@ -6,8 +6,8 @@ from accounts.models import User
 
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    trip = models.ForeignKey(Proparty, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
+    trip = models.ForeignKey(Proparty, related_name='reviews', on_delete=models.CASCADE)
     user_review = models.TextField()
     user_score = models.IntegerField()
     property_review = models.TextField()

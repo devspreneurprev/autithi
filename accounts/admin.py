@@ -21,6 +21,7 @@ class UserAdmin(BaseUserAdmin):
         'full_name',
         'date_of_birth',
         'is_admin',
+        'is_verified',
     )
     list_filter = ('is_admin',)
     fieldsets = (
@@ -39,7 +40,7 @@ class UserAdmin(BaseUserAdmin):
         (
             'Permissions',
             {
-                'fields': ('is_staff', 'is_admin',)
+                'fields': ('is_staff', 'is_admin', 'is_verified')
             }
         ),
     )

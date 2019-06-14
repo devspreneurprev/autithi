@@ -5,8 +5,7 @@ from autithi.utils.location import upload_location
 
 class City(models.Model):
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to=upload_location, null=True,
-                              blank=True, width_field="width_field", height_field="height_field")
+    image = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
     description = models.TextField()
     views = models.IntegerField()
     created_at = models.DateField(auto_now_add=True,)

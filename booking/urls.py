@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import BookingRequestAPIView,BookingCancelingAPIView,BookingAcceptedAPIView
+from .views import BookingRequestAPIView, BookingCancelingAPIView, BookingAcceptedAPIView
 
 urlpatterns = [
     path('request/', BookingRequestAPIView.as_view()),

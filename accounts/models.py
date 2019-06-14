@@ -49,7 +49,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    city = models.ForeignKey(City, on_delete=models.CASCADE, default=1)
+    city = models.ForeignKey(City, related_name='users', on_delete=models.CASCADE, default=1)
     '''
     python manage.py shell
     from city.models import City
@@ -110,7 +110,7 @@ class User(AbstractBaseUser):
 
 
 class Host(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    user = models.ForeignKey(User,  related_name='hosts',on_delete=models.CASCADE,)
     about = models.TextField()
     created_at = models.DateField(auto_now_add=True,)
     updated_at = models.DateField(auto_now=True,)
