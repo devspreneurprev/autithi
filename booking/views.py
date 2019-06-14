@@ -43,7 +43,6 @@ class BookingRequestAPIView(APIView):
 
         if guest_user is not None:
             if guest_user.is_verified == True:
-                print("after authentication", guest_user)
                 if proparty_id is not None:
                     proparty = Proparty.objects.get(id=proparty_id)
                     bookings = Booking.objects.filter(proparty=proparty_id, request_accepted_by_host=True)
