@@ -83,6 +83,28 @@ class CreateUserReviewByHostApiView(APIView):
         return JsonResponse({"created": False})
 
 
+class CreateCommentView(APIView):
+    permission_classes = [AllowAny]
+
+    # user_id, review_id, text
+    def post(self, request):
+        user_id = self.request.GET.get("user_id")
+        user = User.objects.get(id=user_id)
+        review_id = self.request.GET.get("review_id")
+        text = self.request.GET.get("text")
+
+        if user is not None and True:  # user.is_authenticated
+            review = Review.objects.get(id=review_id)  # also check trip ended or not
+            if review is not None:
+                comment_instance = Comment.objects.create(
+                    review=review,
+                    user=user,
+                    text=text,
+                )
+                return JsonResponse({"created": True})
+        return JsonResponse({"created": False})
+
+
 class PropartyReviewListApiView(APIView):
     permission_classes = [AllowAny]
 

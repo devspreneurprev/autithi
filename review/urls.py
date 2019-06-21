@@ -6,7 +6,8 @@ from .views import (
     CreatePropartyReviewByUserApiView,
     CreateUserReviewByHostApiView,
     PropartyReviewListApiView,
-    UserReviewListApiView
+    UserReviewListApiView,
+    CreateCommentView
 )
 
 
@@ -16,6 +17,7 @@ from django.contrib import admin
 urlpatterns = [
     path('create_property/', CreatePropartyReviewByUserApiView.as_view()),
     path('create_user/', CreateUserReviewByHostApiView.as_view()),
+    path('create_comment/', CreateCommentView.as_view()),
     path('get_proparty/', PropartyReviewListApiView.as_view()),
     path('get_user/', UserReviewListApiView.as_view())
 ]
