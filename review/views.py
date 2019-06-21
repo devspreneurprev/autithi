@@ -9,6 +9,8 @@ from .serializers import ReviewListSerializer
 from .models import Review
 from booking.models import Booking
 from property.models import Proparty
+from accounts.models import User
+from review.models import Comment
 
 
 class CreatePropartyReviewByUserApiView(APIView):
@@ -19,20 +21,27 @@ class CreatePropartyReviewByUserApiView(APIView):
         user = self.request.GET.get("user")
         host = self.request.GET.get("host")
 
-        proparty = self.request.GET.get("proparty_id")
+        proparty_id = self.request.GET.get("proparty_id")
         text = self.request.GET.get("text")
         score = self.request.GET.get("score")
-        if user.is_authenticated or True:
-            proparty = Proparty.objects.filter(proparty=proparty)
-            if proparty.exists():
+
+        if True:  # user.is_authenticated
+            print("start\n")
+            proparty = Proparty.objects.get(id=proparty_id)
+            print("read proparty fully\n")
+            if proparty is not None:
                 booking = Booking.objects.filter(user=user, host=host)  # also check trip ended or not
+                print("read booking fully\n")
                 if booking.exists():
+                    print("booking exists")
+                    user = User.objects.get(id=user)
+                    host = User.objects.get(id=host)
                     review_instance = Review.objects.create(
-                        review_on=host,
-                        review_by=user,
+                        reviewed_on=host,
+                        reviewed_by=user,
                         proparty=proparty,
                         created_by=1,
-                        review=text,
+                        text=text,
                         score=score
                     )
                     return JsonResponse({"created": True})
@@ -51,24 +60,24 @@ class CreateUserReviewByHostApiView(APIView):
         user = self.request.GET.get("user")
         host = self.request.GET.get("host")
 
-        proparty = self.request.GET.get("proparty_id")
         text = self.request.GET.get("text")
         score = self.request.GET.get("score")
-        if user.is_authenticated or True:
-            proparty = Proparty.objects.filter(proparty=proparty)
-            if proparty.exists():
-                booking = Booking.objects.filter(user=user, host=host)  # also check trip ended or not
-                if booking.exists():
-                    review_instance = Review.objects.create(
-                        review_on=user,
-                        review_by=host,
-                        created_by=0,
-                        review=text,
-                        score=score
-                    )
-                    return JsonResponse({"created": True})
-                else:
-                    return JsonResponse({"created": False})
+
+        if True:  # user.is_authenticated
+            booking = Booking.objects.filter(user=user, host=host)  # also check trip ended or not
+            print("read booking fully\n")
+            if booking.exists():
+                print("booking exists")
+                user = User.objects.get(id=user)
+                host = User.objects.get(id=host)
+                review_instance = Review.objects.create(
+                    reviewed_on=host,
+                    reviewed_by=user,
+                    created_by=0,
+                    text=text,
+                    score=score
+                )
+                return JsonResponse({"created": True})
             else:
                 return JsonResponse({"created": False})
         return JsonResponse({"created": False})
@@ -80,25 +89,25 @@ class PropartyReviewListApiView(APIView):
     # proparty_id
     def get(self, request):
         data = []
-        property_id = self.request.GET.get("property_id")
-        property_review_list = Review.objects.filter(proparty=property_id)
+        proparty_id = self.request.GET.get("proparty_id")
+        property_review_list = Review.objects.filter(proparty=proparty_id)
         for review in property_review_list:
-                temp = {}
-                temp['user'] = review.reviewed_by
-                temp['text'] = review.text
-                temp['score'] = review.score
-                temp['created_at'] = review.created_at
-                temp['comments'] = []
+            temp = {}
+            temp['user'] = str(review.reviewed_by)
+            temp['text'] = review.text
+            temp['score'] = review.score
+            temp['created_at'] = str(review.created_at)
+            temp['comments'] = []
 
-                comment_list = Comment.objects.filter(review=reviews.id)
-                for comment in comment_list:
-                    temp_comment = {}
-                    temp_comment['user'] = comment.user
-                    temp_comment['text'] = comment.text
-                    temp_comment['created_at'] = comment.created_at
-                    temp['comments'].append(temp_comment)
-                data.append(temp)
-
+            comment_list = Comment.objects.all()
+            print(comment_list)
+            for comment in comment_list:
+                temp_comment = {}
+                temp_comment['user'] = str(comment.user)
+                temp_comment['text'] = comment.text
+                temp_comment['created_at'] = comment.created_at
+                temp['comments'].append(temp_comment)
+            data.append(temp)
         return JsonResponse({"data": data})
 
 
@@ -111,20 +120,20 @@ class UserReviewListApiView(APIView):
         user = self.request.GET.get("user")
         user_review_list = Review.objects.filter(reviewed_on=user)
         for review in user_review_list:
-                temp = {}
-                temp['user'] = review.reviewed_by
-                temp['text'] = review.text
-                temp['score'] = review.score
-                temp['created_at'] = review.created_at
-                temp['comments'] = []
+            temp = {}
+            temp['user'] = review.reviewed_by
+            temp['text'] = review.text
+            temp['score'] = review.score
+            temp['created_at'] = review.created_at
+            temp['comments'] = []
 
-                comment_list = Comment.objects.filter(review=reviews.id)
-                for comment in comment_list:
-                    temp_comment = {}
-                    temp_comment['user'] = comment.user
-                    temp_comment['text'] = comment.text
-                    temp_comment['created_at'] = comment.created_at
-                    temp['comments'].append(temp_comment)
-                data.append(temp)
+            comment_list = Comment.objects.filter(review=reviews.id)
+            for comment in comment_list:
+                temp_comment = {}
+                temp_comment['user'] = comment.user
+                temp_comment['text'] = comment.text
+                temp_comment['created_at'] = comment.created_at
+                temp['comments'].append(temp_comment)
+            data.append(temp)
 
         return JsonResponse({"data": data})

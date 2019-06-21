@@ -16,7 +16,7 @@ class Review(models.Model):
     updated_at = models.DateField(auto_now=True,)
 
     def __str__(self):
-        return str(self.trip)
+        return str(self.proparty)
 
 # class PropartyReview(models.Model):
 #     user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
