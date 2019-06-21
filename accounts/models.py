@@ -69,26 +69,26 @@ class User(AbstractBaseUser):
             )
         ]
     )
-    username = models.CharField(max_length=255,)
-    date_of_birth = models.DateField()
-    phone_number = models.CharField(max_length=255,)
-    zipcode = models.CharField(max_length=120, default="1000",)
+    username = models.CharField(max_length=255,null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    phone_number = models.CharField(max_length=255,null=True, blank=True)
+    zipcode = models.CharField(max_length=120, null=True, blank=True)
     profile_image = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
-    description = models.TextField(max_length=255,)
-    profession = models.CharField(max_length=255,)
+    description = models.TextField(max_length=255,null=True, blank=True)
+    profession = models.CharField(max_length=255,null=True, blank=True)
     id_image1 = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
     id_imege2 = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
     id_type = models.IntegerField(blank=True, null=True)  # 1=NID, 2=PID, 3=DL_ID
-    facebook = models.CharField(max_length=255,)
-    twitter = models.CharField(max_length=255,)
+    facebook = models.CharField(max_length=255,null=True, blank=True)
+    twitter = models.CharField(max_length=255,null=True, blank=True)
     linkedin = models.CharField(max_length=255,)
     created_at = models.DateField(auto_now_add=True,)
     updated_at = models.DateField(auto_now=True,)
 
-    is_verified = models.BooleanField(default=False,)
-    is_active = models.BooleanField(default=True,)
-    is_staff = models.BooleanField(default=False,)
-    is_admin = models.BooleanField(default=False,)
+    is_verified = models.BooleanField(default=False,null=True, blank=True)
+    is_active = models.BooleanField(default=True,null=True, blank=True)
+    is_staff = models.BooleanField(default=False,null=True, blank=True)
+    is_admin = models.BooleanField(default=False,null=True, blank=True)
 
     objects = UserManager()
 
@@ -96,7 +96,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return self.username
+        return str(self.username)
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
