@@ -19,7 +19,6 @@ class BookingRequestAPIView(APIView):
         return begin_date <= date <= end_date
 
     def varifie_booking_date(self, begin_date, end_date, bookings):
-
         if begin_date > end_date:
             return False
         for booking in bookings:
@@ -145,8 +144,8 @@ class BookingCancelingAPIView(APIView):
 
 class BookingDateAPIView(APIView):
     permission_classes = [AllowAny]
-    # parameter = (proparty_id)
 
+    # parameter = (proparty_id)
     def get(self, request):
         proparty_id = self.request.GET.get("proparty_id")
         booking_instance = Booking.objects.filter(proparty=proparty_id, request_accepted_by_host=True)
@@ -155,4 +154,4 @@ class BookingDateAPIView(APIView):
         for booking in booking_instance:
             booking_date_list.append((booking.begin_date, booking.end_date))
         print(booking_date_list)
-        return JsonResponse({'foo': booking_date_list})
+        return JsonResponse({'booking_date_list': booking_date_list})

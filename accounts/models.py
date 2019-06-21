@@ -49,7 +49,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    city = models.ForeignKey(City, related_name='users', on_delete=models.CASCADE, default=1)
+    city = models.ForeignKey(City, related_name='users', on_delete=models.CASCADE, null=True, blank=True)
     '''
     python manage.py shell
     from city.models import City
