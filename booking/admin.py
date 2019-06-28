@@ -4,7 +4,6 @@ from .models import Booking
 
 class BookingAdmin(admin.ModelAdmin):
     fields = (
-        'host',
         'user',
         'proparty',
         'begin_date',

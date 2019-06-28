@@ -1,7 +1,7 @@
 from django.db import models
 
 # User import
-from accounts.models import Host
+from accounts.models import User, Address
 from city.models import City
 from recommendation.models import Recommendation
 from autithi.utils.location import upload_location
@@ -9,14 +9,17 @@ from autithi.utils.location import upload_location
 
 
 class Proparty(models.Model):
-    host = models.ForeignKey(Host, related_name='propartys', on_delete=models.CASCADE,)
+    host = models.ForeignKey(User, related_name='propartys', on_delete=models.CASCADE,)
     city = models.ForeignKey(City, related_name='propartys', on_delete=models.CASCADE,)
+
+    address = models.OneToOneField(Address, related_name='propartys', on_delete=models.CASCADE, null=True, blank=True)
     
-    recommendation = models.ForeignKey(Recommendation, related_name='propartys', on_delete=models.CASCADE, blank=True, null=True)
-    title = models.CharField(max_length=255,)
+    recommendation = models.ForeignKey(Recommendation, related_name='propartys', on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=255,null=True, blank=True)
     slug = models.SlugField()
     description = models.TextField(null=True, blank=True)
-    cost_per_unit = models.DecimalField(max_digits=15, decimal_places=2,null=True, blank=True)
+
+    cost_per_unit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     place_type = models.CharField(max_length=255,null=True, blank=True)
     rental_type = models.CharField(max_length=255,null=True, blank=True)
     house_rules = models.TextField(null=True, blank=True)
@@ -24,16 +27,15 @@ class Proparty(models.Model):
     amenities = models.CharField(max_length=255,null=True, blank=True)
     number_of_badrooms = models.IntegerField(null=True, blank=True)
     number_of_bathrooms = models.IntegerField(null=True, blank=True)
+    number_of_guest = models.IntegerField(null=True, blank=True)
     accommodates = models.CharField(max_length=255,null=True, blank=True)
     times_viewed = models.IntegerField(null=True, blank=True)
-    is_booked = models.BooleanField(default=False, null=True, blank=True)
-    booked_from_date = models.DateField(auto_now_add=True)
-    booked_to_date = models.DateField(auto_now_add=True)
+    
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 class PropartyImage(models.Model):

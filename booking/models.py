@@ -1,13 +1,13 @@
 from django.db import models
-from accounts.models import User, Host
+from accounts.models import User
 from property.models import Proparty
 # user import
 
 
 # Create your models here.
 class Booking(models.Model):
-    host = models.ForeignKey(Host, related_name='bookings', on_delete=models.CASCADE,)
-    user = models.ForeignKey(User, related_name='bookings', on_delete=models.CASCADE,)
+    host = models.ForeignKey(User, related_name='bookings_host', on_delete=models.CASCADE,)
+    user = models.ForeignKey(User, related_name='bookings_user', on_delete=models.CASCADE,)
     proparty = models.ForeignKey(Proparty, related_name='bookings', on_delete=models.CASCADE,)
     requested_by_user = models.BooleanField(default=True)
     request_accepted_by_host = models.BooleanField(default=False)
