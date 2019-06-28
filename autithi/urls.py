@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/property/', include('property.urls')),
     path('api/trip/', include('trip.urls')),
     path('api/booking/', include('booking.urls')),
+    path('api/search/', include('search.urls')),
     path('api/token/auth/', obtain_jwt_token),
     path('api/token/refresh/', refresh_jwt_token),
     path('api/token/verify/', verify_jwt_token),

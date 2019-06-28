@@ -37,16 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     # local app
     'accounts',
     'booking',
     'city',
     'property',
     'review',
-    'trip',
     'recommendation',
+    'search',
+    'trip',
 
-    
     # third party app
     'rest_framework',
     'corsheaders',
