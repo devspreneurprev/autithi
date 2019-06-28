@@ -12,4 +12,4 @@ class BookingAdmin(admin.ModelAdmin):
         'requested_by_user',
         'request_accepted_by_host',
     )
-admin.site.register(Booking)
+admin.site.register(Booking, BookingAdmin)
