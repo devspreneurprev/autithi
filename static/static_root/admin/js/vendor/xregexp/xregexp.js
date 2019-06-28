@@ -11,7 +11,7 @@
  * XRegExp provides augmented, extensible JavaScript regular expressions. You get new syntax,
  * flags, and methods beyond what browsers support natively. XRegExp is also a regex utility belt
  * with tools to make your client-side grepping simpler and more powerful, while freeing you from
- * worrying about pesky cross-browser inconsistencies and the dubious `lastIndex` property. See
+ * worrying about pesky cross-browser inconsistencies and the dubious `lastIndex` Proparty. See
  * XRegExp's documentation (http://xregexp.com/) for more details.
  * @module xregexp
  * @requires N/A
@@ -103,7 +103,7 @@ XRegExp = XRegExp || (function (undef) {
         var p;
         // Can't auto-inherit these since the XRegExp constructor returns a nonprimitive value
         for (p in self.prototype) {
-            if (self.prototype.hasOwnProperty(p)) {
+            if (self.prototype.hasOwnProparty(p)) {
                 regex[p] = self.prototype[p];
             }
         }
@@ -128,7 +128,7 @@ XRegExp = XRegExp || (function (undef) {
 
 /**
  * Copies a regex object while preserving special properties for named capture and augmenting with
- * `XRegExp.prototype` methods. The copy has a fresh `lastIndex` property (set to zero). Allows
+ * `XRegExp.prototype` methods. The copy has a fresh `lastIndex` Proparty (set to zero). Allows
  * adding and removing flags while copying the regex.
  * @private
  * @param {RegExp} regex Regex to copy.
@@ -300,7 +300,7 @@ XRegExp = XRegExp || (function (undef) {
  *                 (?<day>   [0-9]{2})     # day   ', 'x');
  *
  * // Passing a regex object to copy it. The copy maintains special properties for named capture,
- * // is augmented with `XRegExp.prototype` methods, and has a fresh `lastIndex` property (set to
+ * // is augmented with `XRegExp.prototype` methods, and has a fresh `lastIndex` Proparty (set to
  * // zero). Native regexes are not recompiled using XRegExp syntax.
  * XRegExp(/regex/);
  */
@@ -476,7 +476,7 @@ XRegExp = XRegExp || (function (undef) {
  * Executes a regex search in a specified string. Returns a match array or `null`. If the provided
  * regex uses named capture, named backreference properties are included on the match array.
  * Optional `pos` and `sticky` arguments specify the search start position, and whether the match
- * must start at the specified position only. The `lastIndex` property of the provided regex is not
+ * must start at the specified position only. The `lastIndex` Proparty of the provided regex is not
  * used, but is updated for compatibility. Also fixes browser bugs compared to the native
  * `RegExp.prototype.exec` and can be used reliably cross-browser.
  * @memberOf XRegExp
@@ -547,7 +547,7 @@ XRegExp = XRegExp || (function (undef) {
 
 /**
  * Copies a regex object and adds flag `g`. The copy maintains special properties for named
- * capture, is augmented with `XRegExp.prototype` methods, and has a fresh `lastIndex` property
+ * capture, is augmented with `XRegExp.prototype` methods, and has a fresh `lastIndex` Proparty
  * (set to zero). Native regexes are not recompiled using XRegExp syntax.
  * @memberOf XRegExp
  * @param {RegExp} regex Regex to globalize.
@@ -767,7 +767,7 @@ XRegExp = XRegExp || (function (undef) {
 /**
  * Executes a regex search in a specified string. Returns `true` or `false`. Optional `pos` and
  * `sticky` arguments specify the search start position, and whether the match must start at the
- * specified position only. The `lastIndex` property of the provided regex is not used, but is
+ * specified position only. The `lastIndex` Proparty of the provided regex is not used, but is
  * updated for compatibility. Also fixes browser bugs compared to the native
  * `RegExp.prototype.test` and can be used reliably cross-browser.
  * @memberOf XRegExp
@@ -974,7 +974,7 @@ XRegExp = XRegExp || (function (undef) {
  * Adds support for `${n}` tokens for named and numbered backreferences in replacement text, and
  * provides named backreferences to replacement functions as `arguments[0].name`. Also fixes
  * browser bugs in replacement text syntax when performing a replacement using a nonregex search
- * value, and the value of a replacement regex's `lastIndex` property during replacement iterations
+ * value, and the value of a replacement regex's `lastIndex` Proparty during replacement iterations
  * and upon completion. Note that this doesn't support SpiderMonkey's proprietary third (`flags`)
  * argument. Calling `XRegExp.install('natives')` uses this to override the native method. Use via
  * `XRegExp.replace` without overriding natives.
@@ -1375,14 +1375,14 @@ XRegExp = XRegExp || (function (undef) {
         }
         if (pack) {
             for (p in pack) {
-                if (pack.hasOwnProperty(p)) {
+                if (pack.hasOwnProparty(p)) {
                     unicode[slug(p)] = expand(pack[p]);
                 }
             }
         }
         if (aliases) {
             for (p in aliases) {
-                if (aliases.hasOwnProperty(p)) {
+                if (aliases.hasOwnProparty(p)) {
                     unicode[slug(aliases[p])] = unicode[slug(p)];
                 }
             }
@@ -1398,7 +1398,7 @@ XRegExp = XRegExp || (function (undef) {
         L: "Letter"
     });
 
-/* Adds Unicode property syntax to XRegExp: \p{..}, \P{..}, \p{^..}
+/* Adds Unicode Proparty syntax to XRegExp: \p{..}, \P{..}, \p{^..}
  */
     XRegExp.addToken(
         /\\([pP]){(\^?)([^}]*)}/,
@@ -1409,8 +1409,8 @@ XRegExp = XRegExp || (function (undef) {
             if (match[1] === "P" && match[2]) {
                 throw new SyntaxError("invalid double negation \\P{^");
             }
-            if (!unicode.hasOwnProperty(item)) {
-                throw new SyntaxError("invalid or unknown Unicode property " + match[0]);
+            if (!unicode.hasOwnProparty(item)) {
+                throw new SyntaxError("invalid or unknown Unicode Proparty " + match[0]);
             }
             return scope === "class" ?
                     (inv ? cacheInversion(item) : unicode[item]) :
@@ -2126,11 +2126,11 @@ XRegExp = XRegExp || (function (undef) {
         }
 
         for (p in subs) {
-            if (subs.hasOwnProperty(p)) {
+            if (subs.hasOwnProparty(p)) {
                 // Passing to XRegExp enables entended syntax for subpatterns provided as strings
                 // and ensures independent validity, lest an unescaped `(`, `)`, `[`, or trailing
                 // `\` breaks the `(?:)` wrapper. For subpatterns provided as regexes, it dies on
-                // octals and adds the `xregexp` property, for simplicity
+                // octals and adds the `xregexp` Proparty, for simplicity
                 sub = asXRegExp(subs[p]);
                 // Deanchoring allows embedding independently useful anchored regexes. If you
                 // really need to keep your anchors, double them (i.e., `^^...$$`)
@@ -2145,8 +2145,8 @@ XRegExp = XRegExp || (function (undef) {
         pattern = pattern.source.replace(parts, function ($0, $1, $2, $3, $4) {
             var subName = $1 || $2, capName, intro;
             if (subName) { // Named subpattern
-                if (!data.hasOwnProperty(subName)) {
-                    throw new ReferenceError("undefined property " + $0);
+                if (!data.hasOwnProparty(subName)) {
+                    throw new ReferenceError("undefined Proparty " + $0);
                 }
                 if ($1) { // Named subpattern was wrapped in a capturing group
                     capName = outerCapNames[numOuterCaps];
@@ -2216,7 +2216,7 @@ XRegExp = XRegExp || (function (undef) {
  */
     function extend(a, b) {
         for (var p in b) {
-            if (b.hasOwnProperty(p)) {
+            if (b.hasOwnProparty(p)) {
                 a[p] = b[p];
             }
         }

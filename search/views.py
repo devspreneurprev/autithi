@@ -7,7 +7,7 @@ from django.db.models import Q
 import datetime
 
 # Create your views here.
-from property.models import Proparty
+from proparty.models import Proparty
 
 class PropartySearchApiView(APIView):
     permission_classes = [AllowAny]

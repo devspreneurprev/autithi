@@ -1,6 +1,6 @@
 from django.db import models
 
-from property.models import Proparty
+from proparty.models import Proparty
 from accounts.models import User
 # Create your models here.
 

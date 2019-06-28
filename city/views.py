@@ -7,10 +7,10 @@ from rest_framework.permissions import (AllowAny)
 from .models import City
 from .serializers import CityListSerializer
 
-from property.serializers import (
+from proparty.serializers import (
     PropartyListSerializer,
 )
-from property.models import Proparty
+from proparty.models import Proparty
 
 
 class CityListApiView(ListAPIView):
@@ -24,8 +24,6 @@ class CityDetailsApiView(ListAPIView):
 	permission_classes = [AllowAny]
 	def get_queryset(self,*args,**kwargs):
 		pk=self.kwargs.get('pk')
-		
-
 		queryset = Proparty.objects.filter(city=pk)
 		return queryset
 

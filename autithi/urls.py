@@ -30,7 +30,7 @@ urlpatterns = [
     path('api/review/', include('review.urls')),
     path('api/recommendation/', include('recommendation.urls')),
     path('api/city/', include('city.urls')),
-    path('api/property/', include('property.urls')),
+    path('api/proparty/', include('proparty.urls')),
     path('api/trip/', include('trip.urls')),
     path('api/booking/', include('booking.urls')),
     path('api/search/', include('search.urls')),

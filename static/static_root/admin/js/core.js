@@ -200,7 +200,7 @@ function getStyle(oElm, strCssRule) {
     'use strict';
     var strValue = "";
     if(document.defaultView && document.defaultView.getComputedStyle) {
-        strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+        strValue = document.defaultView.getComputedStyle(oElm, "").getPropartyValue(strCssRule);
     }
     else if(oElm.currentStyle) {
         strCssRule = strCssRule.replace(/\-(\w)/g, function(strMatch, p1) {

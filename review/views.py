@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from .serializers import ReviewListSerializer
 from .models import Review
 from booking.models import Booking
-from property.models import Proparty
+from proparty.models import Proparty
 from accounts.models import User
 from review.models import Comment
 
@@ -112,8 +112,8 @@ class PropartyReviewListApiView(APIView):
     def get(self, request):
         data = []
         proparty_id = self.request.GET.get("proparty_id")
-        property_review_list = Review.objects.filter(proparty=proparty_id)
-        for review in property_review_list:
+        proparty_review_list = Review.objects.filter(proparty=proparty_id)
+        for review in proparty_review_list:
             temp = {}
             temp['user'] = str(review.reviewed_by)
             temp['text'] = review.text

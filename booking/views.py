@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 
 from .models import Booking
-from property.models import Proparty
+from proparty.models import Proparty
 from accounts.models import User
 from trip.models import Trip
 

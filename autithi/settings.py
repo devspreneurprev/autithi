@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'booking',
     'city',
-    'property',
+    'proparty',
     'review',
     'recommendation',
     'search',

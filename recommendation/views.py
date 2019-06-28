@@ -7,7 +7,7 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated)
 
 # User defined import
 from .models import Recommendation
-from property.serializers import PropartyDetailSerializer
+from proparty.serializers import PropartyDetailSerializer
 
 
 class RecommendationListAPIView(ListAPIView):

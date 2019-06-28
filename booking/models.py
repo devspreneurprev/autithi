@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import User
-from property.models import Proparty
+from proparty.models import Proparty
 # user import
 
 
