@@ -1,7 +1,7 @@
 from django.db import models
 
 # User import
-from property.models import Proparty
+from proparty.models import Proparty
 from accounts.models import User
 from booking.models import Booking
 # Create your models here.

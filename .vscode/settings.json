@@ -1,3 +1,20 @@
 {
-    "python.pythonPath": "/home/nayan32biswas/envs/autithi/bin/python"
+    "python.pythonPath": "/home/nayan32biswas/envs/autithi/bin/python",
+    "explorer.confirmDelete": false,
+    "window.zoomLevel": 0,
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx"
+    },
+    "editor.fontSize": 14,
+    "python.jediEnabled": false,
+    "editor.suggestSelection": "first",
+    "editor.wordWrapColumn": 500,
+    "editor.wrappingIndent": "none",
+    "html.format.wrapLineLength": 0,
+    "python.formatting.autopep8Args": [
+        "--max-line-length=500"
+    ],
+    "vsicons.dontShowNewVersionMessage": true,
+    "files.autoSaveDelay": 100,
+    "files.autoSave": "afterDelay"
 }

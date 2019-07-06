@@ -16,7 +16,6 @@ class UserCreationForm(forms.ModelForm):
         fields = (
             'full_name',
             'email',
-            'zipcode',
             'date_of_birth'
         )
 

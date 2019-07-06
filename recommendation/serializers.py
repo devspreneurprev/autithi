@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 # from .models import Recommendation
-from property.models import Proparty
+from proparty.models import Proparty
 
 class RecommendationListSerializer(ModelSerializer):
     class Meta:

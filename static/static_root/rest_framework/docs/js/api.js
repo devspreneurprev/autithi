@@ -151,7 +151,7 @@ $(function () {
     $form.find(':checkbox').each(function (index) {
       // Handle unselected checkboxes
       var name = $(this).attr('name')
-      if (!params.hasOwnProperty(name)) {
+      if (!params.hasOwnProparty(name)) {
         params[name] = false
       }
     })

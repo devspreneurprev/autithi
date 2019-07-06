@@ -5,9 +5,10 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 
 from .models import Booking
-from property.models import Proparty
+from proparty.models import Proparty
 from accounts.models import User
 from trip.models import Trip
+from notification.models import Notification
 
 
 class BookingRequestAPIView(APIView):
@@ -55,16 +56,22 @@ class BookingRequestAPIView(APIView):
                             user=guest_user,
                             proparty=proparty,
                             host=host,
+                            requested_by_user=True,
                             begin_date=begin_date,
                             end_date=end_date
                         )
+                        notification_instance = Notification.objects.create(
+                            user=host,
+                            proparty=proparty,
+                            checked=False,
+                            url=f'http://127.0.0.1:8000/api/proparty/?slug={proparty.slug}',
+                            text=f"booking requested by {str(guest_user)}"
+                        )
                         # here notify the host
             else:
-                raise Exception("User is not varified")
+                Response("User is not varified")
         else:
-            raise Exception("User is not logedin")
-            pass
-
+            Response("User is not logedin")
         return Response("Booking completed. Please wait for confirmation")
 
     def post(self, request):

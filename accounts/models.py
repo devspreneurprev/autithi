@@ -12,6 +12,20 @@ from autithi.utils.location import upload_location
 EMAIL_REGEX = '^[a-z0-9.@]*$'
 
 
+
+class Address(models.Model):
+    address = models.CharField(max_length=255, null=True, blank=True)
+    street = models.CharField(max_length=120, null=True, blank=True)
+    postal_code = models.IntegerField(null=True, blank=True)
+    area = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
+    country = models.CharField(max_length=255, null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+
+
+
+
 class UserManager(BaseUserManager):
     def create_user(self, email, username, date_of_birth, password=None):
         """
@@ -50,13 +64,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     city = models.ForeignKey(City, related_name='users', on_delete=models.CASCADE, null=True, blank=True)
-    '''
-    python manage.py shell
-    from city.models import City
-    c = City(name='unknown city', description='unknown city', views=0)
-    c.save()
-    '''
-    full_name = models.CharField(max_length=255, blank=True, null=True)
+    full_name = models.CharField(max_length=255, null=True, blank=True)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -72,23 +80,24 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=255,null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=255,null=True, blank=True)
-    zipcode = models.CharField(max_length=120, null=True, blank=True)
-    profile_image = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
+    address = models.OneToOneField(Address, related_name='users', on_delete=models.CASCADE, null=True, blank=True)
+    profile_image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
     description = models.TextField(max_length=255,null=True, blank=True)
     profession = models.CharField(max_length=255,null=True, blank=True)
-    id_image1 = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
-    id_imege2 = models.ImageField(upload_to=upload_location, null=True,blank=True, width_field="width_field", height_field="height_field")
-    id_type = models.IntegerField(blank=True, null=True)  # 1=NID, 2=PID, 3=DL_ID
+    id_image1 = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
+    id_imege2 = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
+    id_type = models.IntegerField(null=True, blank=True)  # 1=NID, 2=PID, 3=DL_ID
     facebook = models.CharField(max_length=255,null=True, blank=True)
     twitter = models.CharField(max_length=255,null=True, blank=True)
-    linkedin = models.CharField(max_length=255,)
-    created_at = models.DateField(auto_now_add=True,)
-    updated_at = models.DateField(auto_now=True,)
+    linkedin = models.CharField(max_length=255, null=True, blank=True)
 
     is_verified = models.BooleanField(default=False,null=True, blank=True)
     is_active = models.BooleanField(default=True,null=True, blank=True)
     is_staff = models.BooleanField(default=False,null=True, blank=True)
     is_admin = models.BooleanField(default=False,null=True, blank=True)
+
+    created_at = models.DateField(auto_now_add=True,)
+    updated_at = models.DateField(auto_now=True,)
 
     objects = UserManager()
 
@@ -109,11 +118,3 @@ class User(AbstractBaseUser):
         return True
 
 
-class Host(models.Model):
-    user = models.ForeignKey(User,  related_name='hosts',on_delete=models.CASCADE,)
-    about = models.TextField()
-    created_at = models.DateField(auto_now_add=True,)
-    updated_at = models.DateField(auto_now=True,)
-
-    def __str__(self):
-        return self.user.username

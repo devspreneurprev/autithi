@@ -63,7 +63,7 @@ var class2type = {};
 
 var toString = class2type.toString;
 
-var hasOwn = class2type.hasOwnProperty;
+var hasOwn = class2type.hasOwnProparty;
 
 var fnToString = hasOwn.toString;
 
@@ -547,7 +547,7 @@ var i,
 	},
 
 	// Instance methods
-	hasOwn = ({}).hasOwnProperty,
+	hasOwn = ({}).hasOwnProparty,
 	arr = [],
 	pop = arr.pop,
 	push_native = arr.push,
@@ -848,7 +848,7 @@ function Sizzle( selector, context, results, seed ) {
 /**
  * Create key-value caches of limited size
  * @returns {function(string, object)} Returns the Object data after storing it on itself with
- *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
+ *	Proparty name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
  *	deleting the oldest entry
  */
 function createCache() {
@@ -979,7 +979,7 @@ function createDisabledPseudo( disabled ) {
 			//   https://html.spec.whatwg.org/multipage/forms.html#concept-fe-disabled
 			// * option elements in a disabled optgroup
 			//   https://html.spec.whatwg.org/multipage/forms.html#concept-option-disabled
-			// All such elements have a "form" property.
+			// All such elements have a "form" Proparty.
 			if ( elem.parentNode && elem.disabled === false ) {
 
 				// Option elements defer to a parent optgroup if present
@@ -992,7 +992,7 @@ function createDisabledPseudo( disabled ) {
 				}
 
 				// Support: IE 6 - 11
-				// Use the isDisabled shortcut property to check for disabled fieldset ancestors
+				// Use the isDisabled shortcut Proparty to check for disabled fieldset ancestors
 				return elem.isDisabled === disabled ||
 
 					// Where there is no isDisabled, check manually
@@ -1003,7 +1003,7 @@ function createDisabledPseudo( disabled ) {
 
 			return elem.disabled === disabled;
 
-		// Try to winnow out elements that can't be disabled before trusting the disabled property.
+		// Try to winnow out elements that can't be disabled before trusting the disabled Proparty.
 		// Some victims get caught in our net (label, legend, menu, track), but it shouldn't
 		// even exist on them, let alone have a boolean value.
 		} else if ( "label" in elem ) {
@@ -1897,7 +1897,7 @@ Expr = Sizzle.selectors = {
 			// But maintain support for old signatures
 			if ( fn.length > 1 ) {
 				args = [ pseudo, pseudo, "", argument ];
-				return Expr.setFilters.hasOwnProperty( pseudo.toLowerCase() ) ?
+				return Expr.setFilters.hasOwnProparty( pseudo.toLowerCase() ) ?
 					markFunction(function( seed, matches ) {
 						var idx,
 							matched = fn( seed, argument ),
@@ -2015,7 +2015,7 @@ Expr = Sizzle.selectors = {
 		},
 
 		"selected": function( elem ) {
-			// Accessing this property makes selected-by-default
+			// Accessing this Proparty makes selected-by-default
 			// options in Safari work properly
 			if ( elem.parentNode ) {
 				elem.parentNode.selectedIndex;
@@ -2704,7 +2704,7 @@ support.sortDetached = assert(function( el ) {
 });
 
 // Support: IE<8
-// Prevent attribute/property "interpolation"
+// Prevent attribute/Proparty "interpolation"
 // https://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
 if ( !assert(function( el ) {
 	el.innerHTML = "<a href='#'></a>";
@@ -4028,11 +4028,11 @@ Data.prototype = {
 				if ( owner.nodeType ) {
 					owner[ this.expando ] = value;
 
-				// Otherwise secure it in a non-enumerable property
-				// configurable must be true to allow the property to be
+				// Otherwise secure it in a non-enumerable Proparty
+				// configurable must be true to allow the Proparty to be
 				// deleted when data is removed
 				} else {
-					Object.defineProperty( owner, this.expando, {
+					Object.defineProparty( owner, this.expando, {
 						value: value,
 						configurable: true
 					} );
@@ -5259,7 +5259,7 @@ jQuery.event = {
 	},
 
 	addProp: function( name, hook ) {
-		Object.defineProperty( jQuery.Event.prototype, name, {
+		Object.defineProparty( jQuery.Event.prototype, name, {
 			enumerable: true,
 			configurable: true,
 
@@ -5276,7 +5276,7 @@ jQuery.event = {
 				},
 
 			set: function( value ) {
-				Object.defineProperty( this, name, {
+				Object.defineProparty( this, name, {
 					enumerable: true,
 					configurable: true,
 					writable: true,
@@ -6161,11 +6161,11 @@ function curCSS( elem, name, computed ) {
 
 	computed = computed || getStyles( elem );
 
-	// getPropertyValue is needed for:
+	// getPropartyValue is needed for:
 	//   .css('filter') (IE 9 only, #12537)
-	//   .css('--customProperty) (#3144)
+	//   .css('--customProparty) (#3144)
 	if ( computed ) {
-		ret = computed.getPropertyValue( name ) || computed[ name ];
+		ret = computed.getPropartyValue( name ) || computed[ name ];
 
 		if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
 			ret = jQuery.style( elem, name );
@@ -6239,7 +6239,7 @@ var
 	cssPrefixes = [ "Webkit", "Moz", "ms" ],
 	emptyStyle = document.createElement( "div" ).style;
 
-// Return a css property mapped to a potentially vendor prefixed property
+// Return a css Proparty mapped to a potentially vendor prefixed Proparty
 function vendorPropName( name ) {
 
 	// Shortcut for names that are not vendor prefixed
@@ -6259,8 +6259,8 @@ function vendorPropName( name ) {
 	}
 }
 
-// Return a property mapped along what jQuery.cssProps suggests or to
-// a vendor prefixed property.
+// Return a Proparty mapped along what jQuery.cssProps suggests or to
+// a vendor prefixed Proparty.
 function finalPropName( name ) {
 	var ret = jQuery.cssProps[ name ];
 	if ( !ret ) {
@@ -6401,8 +6401,8 @@ function getWidthOrHeight( elem, dimension, extra ) {
 
 jQuery.extend( {
 
-	// Add in style property hooks for overriding the default
-	// behavior of getting and setting a style property
+	// Add in style Proparty hooks for overriding the default
+	// behavior of getting and setting a style Proparty
 	cssHooks: {
 		opacity: {
 			get: function( elem, computed ) {
@@ -6437,7 +6437,7 @@ jQuery.extend( {
 	// setting or getting the value
 	cssProps: {},
 
-	// Get and set the style property on a DOM Node
+	// Get and set the style Proparty on a DOM Node
 	style: function( elem, name, value, extra ) {
 
 		// Don't set styles on text and comment nodes
@@ -6452,7 +6452,7 @@ jQuery.extend( {
 			style = elem.style;
 
 		// Make sure that we're working with the right name. We don't
-		// want to query the value if it is a CSS custom property
+		// want to query the value if it is a CSS custom Proparty
 		// since they are user-defined.
 		if ( !isCustomProp ) {
 			name = finalPropName( origName );
@@ -6493,7 +6493,7 @@ jQuery.extend( {
 				( value = hooks.set( elem, value, extra ) ) !== undefined ) {
 
 				if ( isCustomProp ) {
-					style.setProperty( name, value );
+					style.setProparty( name, value );
 				} else {
 					style[ name ] = value;
 				}
@@ -6519,7 +6519,7 @@ jQuery.extend( {
 			isCustomProp = rcustomProp.test( name );
 
 		// Make sure that we're working with the right name. We don't
-		// want to modify the value if it is a CSS custom property
+		// want to modify the value if it is a CSS custom Proparty
 		// since they are user-defined.
 		if ( !isCustomProp ) {
 			name = finalPropName( origName );
@@ -6735,8 +6735,8 @@ Tween.propHooks = {
 		get: function( tween ) {
 			var result;
 
-			// Use a property on the element directly when it is not a DOM element,
-			// or when there is no matching style property that exists.
+			// Use a Proparty on the element directly when it is not a DOM element,
+			// or when there is no matching style Proparty that exists.
 			if ( tween.elem.nodeType !== 1 ||
 				tween.elem[ tween.prop ] != null && tween.elem.style[ tween.prop ] == null ) {
 				return tween.elem[ tween.prop ];
@@ -6851,7 +6851,7 @@ function createTween( value, prop, animation ) {
 	for ( ; index < length; index++ ) {
 		if ( ( tween = collection[ index ].call( animation, prop, value ) ) ) {
 
-			// We're done with this property
+			// We're done with this Proparty
 			return tween;
 		}
 	}
@@ -7017,7 +7017,7 @@ function defaultPrefilter( elem, props, opts ) {
 			} );
 		}
 
-		// Per-property setup
+		// Per-Proparty setup
 		propTween = createTween( hidden ? dataShow[ prop ] : 0, prop, anim );
 		if ( !( prop in dataShow ) ) {
 			dataShow[ prop ] = propTween.start;
@@ -7289,7 +7289,7 @@ jQuery.fn.extend( {
 			optall = jQuery.speed( speed, easing, callback ),
 			doAnimation = function() {
 
-				// Operate on a copy of prop so per-property easing won't be lost
+				// Operate on a copy of prop so per-Proparty easing won't be lost
 				var anim = Animation( this, jQuery.extend( {}, prop ), optall );
 
 				// Empty animations, or finishing resolves immediately
@@ -7726,7 +7726,7 @@ jQuery.extend( {
 } );
 
 // Support: IE <=11 only
-// Accessing the selectedIndex property
+// Accessing the selectedIndex Proparty
 // forces the browser to respect setting selected
 // on the option
 // The getter ensures a default option is selected
@@ -9050,13 +9050,13 @@ jQuery.extend( {
 			urlAnchor = document.createElement( "a" );
 
 			// Support: IE <=8 - 11, Edge 12 - 15
-			// IE throws exception on accessing the href property if url is malformed,
+			// IE throws exception on accessing the href Proparty if url is malformed,
 			// e.g. http://example.com:80x/
 			try {
 				urlAnchor.href = s.url;
 
 				// Support: IE <=8 - 11 only
-				// Anchor's host property isn't correctly set when s.url is relative
+				// Anchor's host Proparty isn't correctly set when s.url is relative
 				urlAnchor.href = urlAnchor.href;
 				s.crossDomain = originAnchor.protocol + "//" + originAnchor.host !==
 					urlAnchor.protocol + "//" + urlAnchor.host;
@@ -9533,7 +9533,7 @@ jQuery.ajaxTransport( function( options ) {
 
 								// Support: IE <=9 only
 								// On a manual native abort, IE9 throws
-								// errors on any property access that is not readyState
+								// errors on any Proparty access that is not readyState
 								if ( typeof xhr.status !== "number" ) {
 									complete( 0, "error" );
 								} else {
