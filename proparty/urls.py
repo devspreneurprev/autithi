@@ -7,5 +7,8 @@ urlpatterns = [
     path("", PropartyListAPIView.as_view()),
     path("create/", PropertyCreateAPIView.as_view()),
     path("<slug>/", PropartyDetailAPIView.as_view()),
-
 ]
+
+"""
+git merge with common
+"""
