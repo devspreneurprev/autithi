@@ -5,5 +5,5 @@ from .views import PropartyListAPIView, PropartyDetailAPIView
 
 urlpatterns = [
     path("", PropartyListAPIView.as_view()),
-    path("<slug>/", PropartyDetailAPIView.as_view()),
+    path("<slug>/", PropartyDetailAPIView.as_view(), name='proparty'),
 ]

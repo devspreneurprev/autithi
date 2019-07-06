@@ -7,7 +7,10 @@ from .serializers import (
     PropartyDetailSerializer
 )
 from rest_framework.generics import (
-    CreateAPIView, ListAPIView, RetrieveAPIView)
+    CreateAPIView,
+    ListAPIView,
+    RetrieveAPIView
+)
 from rest_framework.views import APIView
 from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from rest_framework.response import Response

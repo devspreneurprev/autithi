@@ -34,7 +34,7 @@ class UserAdmin(BaseUserAdmin):
         (
             'Personal info',
             {
-                'fields': ('zipcode', 'date_of_birth',)
+                'fields': ('date_of_birth',)
             }
         ),
         (
