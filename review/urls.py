@@ -19,5 +19,5 @@ urlpatterns = [
     path('create_user/', CreateUserReviewByHostApiView.as_view()),
     path('create_comment/', CreateCommentView.as_view()),
     path('get_proparty/', PropartyReviewListApiView.as_view()),
-    path('get_user/', UserReviewListApiView.as_view())
+    path('get_user/', UserReviewListApiView.as_view()),
 ]

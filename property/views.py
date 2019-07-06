@@ -52,3 +52,11 @@ class PropartyDetailAPIView(RetrieveAPIView):
     serializer_class = PropartyDetailSerializer
     lookup_field = 'slug'
     permission_classes = [AllowAny]
+
+class PropertyCreateAPIView(APIView):
+    serializer_class = PropartyListSerializer
+    permission_classes = [IsAuthenticated]
+
+    
+
+
