@@ -53,7 +53,7 @@ class PropartyListAPIView(ListAPIView):
 class PropartyDetailAPIView(RetrieveAPIView):
     queryset = Proparty.objects.all()
     serializer_class = PropartyDetailSerializer
-    lookup_field = 'slug'
+    lookup_field = 'id'
     permission_classes = [AllowAny]
 
 class PropertyCreateAPIView(APIView):

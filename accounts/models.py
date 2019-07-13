@@ -12,7 +12,6 @@ from autithi.utils.location import upload_location
 EMAIL_REGEX = '^[a-z0-9.@]*$'
 
 
-
 class Address(models.Model):
     address = models.CharField(max_length=255, null=True, blank=True)
     street = models.CharField(max_length=120, null=True, blank=True)
@@ -24,10 +23,8 @@ class Address(models.Model):
     longitude = models.FloatField(null=True, blank=True)
 
 
-
-
 class UserManager(BaseUserManager):
-    def create_user(self, email, username, date_of_birth, password=None):
+    def create_user(self, email, username, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -38,7 +35,6 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
-            date_of_birth=date_of_birth,
         )
 
         user.set_password(password)
@@ -54,7 +50,6 @@ class UserManager(BaseUserManager):
             email,
             username,
             password=password,
-            date_of_birth=datetime.datetime(1996, 7, 27),
         )
         user.is_staff = True
         user.is_admin = True
@@ -63,7 +58,6 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    city = models.ForeignKey(City, related_name='users', on_delete=models.CASCADE, null=True, blank=True)
     full_name = models.CharField(max_length=255, null=True, blank=True)
     email = models.EmailField(
         verbose_name='email address',
@@ -77,24 +71,26 @@ class User(AbstractBaseUser):
             )
         ]
     )
-    username = models.CharField(max_length=255,null=True, blank=True)
+    is_email_verified = models.BooleanField(default=False, null=True, blank=True)
+    username = models.CharField(max_length=255, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
-    phone_number = models.CharField(max_length=255,null=True, blank=True)
+    phone_number = models.CharField(max_length=255, null=True, blank=True)
+    is_phone_number_verified = models.BooleanField(default=False, null=True, blank=True)
     address = models.OneToOneField(Address, related_name='users', on_delete=models.CASCADE, null=True, blank=True)
     profile_image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
-    description = models.TextField(max_length=255,null=True, blank=True)
-    profession = models.CharField(max_length=255,null=True, blank=True)
+    description = models.TextField(max_length=255, null=True, blank=True)
+    profession = models.CharField(max_length=255, null=True, blank=True)
     id_image1 = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
     id_imege2 = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
     id_type = models.IntegerField(null=True, blank=True)  # 1=NID, 2=PID, 3=DL_ID
-    facebook = models.CharField(max_length=255,null=True, blank=True)
-    twitter = models.CharField(max_length=255,null=True, blank=True)
+    facebook = models.CharField(max_length=255, null=True, blank=True)
+    twitter = models.CharField(max_length=255, null=True, blank=True)
     linkedin = models.CharField(max_length=255, null=True, blank=True)
 
-    is_verified = models.BooleanField(default=False,null=True, blank=True)
-    is_active = models.BooleanField(default=True,null=True, blank=True)
-    is_staff = models.BooleanField(default=False,null=True, blank=True)
-    is_admin = models.BooleanField(default=False,null=True, blank=True)
+    is_verified = models.BooleanField(default=False, null=True, blank=True)
+    is_active = models.BooleanField(default=True, null=True, blank=True)
+    is_staff = models.BooleanField(default=False, null=True, blank=True)
+    is_admin = models.BooleanField(default=False, null=True, blank=True)
 
     created_at = models.DateField(auto_now_add=True,)
     updated_at = models.DateField(auto_now=True,)
@@ -116,5 +112,3 @@ class User(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
-
-

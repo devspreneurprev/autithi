@@ -18,6 +18,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = (
         'email',
         'username',
+        'address',
         'full_name',
         'date_of_birth',
         'is_admin',
@@ -28,7 +29,7 @@ class UserAdmin(BaseUserAdmin):
         (
             None,
             {
-                'fields': ('email', 'username', 'full_name', 'password')
+                'fields': ('email', 'username', 'address', 'full_name', 'password')
             }
         ),
         (
