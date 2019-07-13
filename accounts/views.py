@@ -1,3 +1,5 @@
+import jwt
+import json
 from django.shortcuts import render, get_object_or_404
 from rest_framework.generics import (CreateAPIView)
 from rest_framework.views import APIView
@@ -66,17 +68,24 @@ class UserProfileAPIView(APIView):
 
 
 class UserProfileUpdateAPIView(APIView):
-    permission_classes = [AllowAny]
-    # permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     lookup_field = 'id'
 
     def post(self, request, *args, **kwargs):
         data = {}
-        # data["token"] = request.GET.get('Authorization')
-        # token = data["token"]
-        # user_email = token.email  # error may ocure
         data = self.request.GET
-        email = data.get("email")
+
+        token = data.get("token")
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        if not token:
+            return JsonResponse({})
+        decodedPayload = jwt.decode(token, None, None)
+        email = decodedPayload.get("email")
+        user_id = decodedPayload.get("user_id")
+        username = decodedPayload.get("username")
+
         full_name = data.get("full_name")
         profile_image = data.get("profile_image")
         description = data.get("description")
@@ -91,24 +100,23 @@ class UserProfileUpdateAPIView(APIView):
         country = data.get("country")
         latitude = data.get("latitude")
         longitude = data.get("longitude")
-        print(email, full_name, description)
 
         try:
-            user_instance = get_object_or_404(User, email=email, is_active=True)
+            user_instance = get_object_or_404(User, id=user_id, is_active=True)
         except Exception as error:
             return JsonResponse({"error": str(error)})
 
-        address = user_instance.address
-        if address:
-            address_instance = Address.objects.filter(id=address.id).update(
-                address=address,
-                street=street,
-                postal_code=postal_code,
-                city=city,
-                country=country,
-                latitude=latitude,
-                longitude=longitude
-            )
+        address_instance = user_instance.address
+        coun = Address.objects.filter(id=address_instance.id).update(
+            address=address,
+            street=street,
+            postal_code=postal_code,
+            city=city,
+            country=country,
+            latitude=latitude,
+            longitude=longitude
+        )
+        address_instance = Address.objects.get(id=address_instance.id)
         user_instance.full_name = full_name,
         # user_instance.profile_image = profile_image,
         user_instance.description = description,

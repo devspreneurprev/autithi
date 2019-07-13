@@ -149,7 +149,7 @@ class UserReviewListApiView(APIView):
             temp['created_at'] = review.created_at
             temp['comments'] = []
 
-            comment_list = Comment.objects.filter(review=reviews.id)
+            comment_list = Comment.objects.filter(review=review.id)
             for comment in comment_list:
                 temp_comment = {}
                 temp_comment['user'] = comment.user

@@ -1,15 +1,63 @@
 from django.db import models
+from django.db.models import Q
+from django.db.models.signals import pre_save, post_save
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 from django.core.validators import RegexValidator
 import datetime
 
+
 # User import
 from city.models import City
 from autithi.utils.location import upload_location
 
 EMAIL_REGEX = '^[a-z0-9.@]*$'
+
+
+class AddressQuerySet(models.query.QuerySet):
+    def active(self):
+        return self.filter(active=True)
+
+    def featured(self):
+        return self.filter(featured=True, active=True)
+
+    def search(self, query):
+        lookups = (
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(price__icontains=query) |
+            Q(tag__title__icontains=query)
+        )
+        return self.filter(lookups).distinct()
+
+
+class AddressManager(models.Manager):
+    def get_queryset(self):
+        return AddressQuerySet(self.model, using=self._db)
+
+    def all(self):
+        return self.get_queryset().active()
+
+    def featured(self):  # Product.objects.featured()
+        return self.get_queryset().featured()
+
+    def get_by_id(self, id):
+        qs = self.get_queryset().filter(id=id)  # Product.objects == self.get_queryset()
+        if qs.count() == 1:
+            return qs.first()
+        return None
+
+    def search(self, query):
+        return self.get_queryset().active().search(query)
+
+    def create_or(self, *args, **kwargs):
+        id = kwargs.get("id")
+        del kwargs["id"]
+        if id:
+            instance = self.get_queryset().update(**kwargs)
+            return self.get_queryset().get(id=instance), False
+        return self.get_queryset().create(**kwargs), True
 
 
 class Address(models.Model):
@@ -22,13 +70,11 @@ class Address(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
 
+    objects = AddressManager()
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
-        """
-        Creates and saves a User with the given email, date of
-        birth and password.
-        """
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -36,16 +82,11 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email),
             username=username,
         )
-
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, username, password):
-        """
-        Creates and saves a superuser with the given email, date of
-        birth and password.
-        """
         user = self.create_user(
             email,
             username,
@@ -112,3 +153,11 @@ class User(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+
+
+def pre_save_create_address(sender, instance, *args, **kwargs):
+    if not instance.address:
+        instance.address = Address.objects.create(address='None')
+
+
+pre_save.connect(pre_save_create_address, sender=User)
