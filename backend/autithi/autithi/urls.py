@@ -7,7 +7,6 @@ from rest_framework_jwt.views import verify_jwt_token
 from django.contrib import admin
 from django.urls import include, path
 
-
 urlpatterns = [
     path('api/admin/', admin.site.urls),
     path('api/user/', include('accounts.urls')),
@@ -29,3 +28,5 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
+
+

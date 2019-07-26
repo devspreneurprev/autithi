@@ -13,7 +13,7 @@ from notification.models import Notification
 from .mixins import LoginRequiredMixin
 from .permissions import IsOwnerAndAuth
 
-class BookingRequestAPIView(LoginRequiredMixin, APIView):
+class BookingRequestAPIView(APIView):
     # serializer_class = PropartyListSerializer
     # queryset = Proparty.objects.all()
     # permission_classes = [AllowAny]

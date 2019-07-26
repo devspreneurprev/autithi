@@ -14,10 +14,7 @@ from rest_framework.serializers import (
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = (
-            'email',
-            'full_name',
-        )
+        fields = '__all__'
 
 # class UserProfileUpdateSerializer(Serializer):
 #     class Meta:

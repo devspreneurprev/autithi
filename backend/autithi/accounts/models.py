@@ -69,6 +69,7 @@ class Address(models.Model):
     country = models.CharField(max_length=255, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+    active = models.BooleanField(default=True)
 
     objects = AddressManager()
 

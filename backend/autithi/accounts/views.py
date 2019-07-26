@@ -1,7 +1,13 @@
 import jwt
 import json
 from django.shortcuts import render, get_object_or_404
-from rest_framework.generics import (CreateAPIView)
+from rest_framework.generics import (
+    CreateAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    DestroyAPIView,
+    UpdateAPIView
+)
 from rest_framework.views import APIView
 from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from rest_framework.response import Response

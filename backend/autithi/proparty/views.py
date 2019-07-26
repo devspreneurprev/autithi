@@ -4,12 +4,16 @@ import jwt
 # Create your views here.
 from .serializers import (
     PropartyListSerializer,
-    PropartyDetailSerializer
+    PropartyDetailSerializer,
+
+    PropartyImageSerializer,
 )
 from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
-    RetrieveAPIView
+    RetrieveAPIView,
+    DestroyAPIView,
+    UpdateAPIView
 )
 from rest_framework.views import APIView
 from rest_framework.permissions import (AllowAny, IsAuthenticated)
@@ -17,19 +21,12 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
 # User defined import
-from .models import Proparty
+from .models import Proparty, PropartyImage
 from accounts.models import User
 from booking.mixins import LoginRequiredMixin
 
-class PropartyListAPIView(LoginRequiredMixin, ListAPIView):
-    def get_queryset(self):
-        print(self.request.user)
-        # token = self.request.GET.get("foo")
-        # decodedPayload = jwt.decode(token,None,None)
-        # print("get_queryset -> ", token , "\n", decodedPayload,"\n\n")
-        queryset = Proparty.objects.all()
-        return queryset
-
+class PropartyListAPIView(ListAPIView):
+    queryset = Proparty.objects.all()
     serializer_class = PropartyListSerializer
     permission_classes = [IsAuthenticated]
 
@@ -41,6 +38,27 @@ class PropartyDetailAPIView(RetrieveAPIView):
     permission_classes = [AllowAny]
 
 
-class PropertyCreateAPIView(APIView):
-    serializer_class = PropartyListSerializer
-    permission_classes = [IsAuthenticated]
+class PropertyCreateAPIView(CreateAPIView):
+    queryset = Proparty.objects.all()
+    serializer_class = PropartyDetailSerializer
+    permission_classes = [AllowAny]
+
+
+class PropertyDeleteAPIView(DestroyAPIView):
+    queryset = Proparty.objects.all()
+    serializer_class = PropartyDetailSerializer
+    lookup_field = 'id'
+    permission_classes = [AllowAny]
+
+
+class PropertyUpdateAPIView(UpdateAPIView):
+    queryset = Proparty.objects.all()
+    serializer_class = PropartyDetailSerializer
+    lookup_field = 'id'
+    permission_classes = [AllowAny]
+
+
+class PropartyImageListAPIView(ListAPIView):
+    queryset = PropartyImage.objects.all()
+    serializer_class = PropartyImageSerializer
+    permission_classes = [AllowAny]
