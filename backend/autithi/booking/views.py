@@ -10,11 +10,14 @@ from accounts.models import User
 from trip.models import Trip
 from notification.models import Notification
 
+from .mixins import LoginRequiredMixin
+from .permissions import IsOwnerAndAuth
 
 class BookingRequestAPIView(APIView):
     # serializer_class = PropartyListSerializer
     # queryset = Proparty.objects.all()
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
+    permission_classes = [IsOwnerAndAuth]
 
     def date_in_range(self, begin_date, end_date, date):
         return begin_date <= date <= end_date
