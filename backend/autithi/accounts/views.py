@@ -7,6 +7,7 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework import status
 
 # User defined import
 from .serializers import (
@@ -33,6 +34,14 @@ class UserLoginAPIView(APIView):
             new_data = serializer.data
             return Response(new_data, status=HTTP_200_OK)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+
+class Logout(APIView):
+    def get(self, request, format=None):
+        # simply delete the token to force a login
+        print(request.user)
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_200_OK)
 
 
 class UserProfileAPIView(APIView):

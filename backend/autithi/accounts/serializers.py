@@ -19,6 +19,13 @@ class UserDetailSerializer(ModelSerializer):
             'full_name',
         )
 
+# class UserProfileUpdateSerializer(Serializer):
+#     class Meta:
+#         model = User
+#         fields = (
+#             'email',
+#             'full_name',
+#         )
 
 class UserCreateSerializer(ModelSerializer):
     password1 = CharField(label='Password')
@@ -36,13 +43,6 @@ class UserCreateSerializer(ModelSerializer):
             "password1": {"write_only": True},
             "password2": {"write_only": True}
         }
-
-    # def validate(self, data):
-    #     email = data['email']
-    #     user_qs = User.objects.filter(email=email)
-    #     if user_qs.exists():
-    #         raise ValidationError("This user has already registered.")
-    #     return data
 
     def validate_email(self, value):
         data = self.get_initial()
