@@ -13,11 +13,11 @@ from .views import (
 )
 
 urlpatterns = [
-    path("", PropartyListAPIView.as_view()),
-    path("create/", PropertyCreateAPIView.as_view()),
-    path("user/<id>", UserPropartyListAPIView.as_view()),
-    path("image/<id>", PropartyImageListAPIView.as_view()),
-    path("delete/<id>", PropertyDeleteAPIView.as_view()),
-    path("update/<id>", PropertyUpdateAPIView.as_view()),
-    path("<id>/", PropartyDetailAPIView.as_view()),
+    path("", PropartyListAPIView.as_view(), name='proparty_list'),
+    path("create/", PropertyCreateAPIView.as_view(), name='proparty_create'),
+    path("user/<id>", UserPropartyListAPIView.as_view(), name='user_proparty'),
+    path("image/<id>", PropartyImageListAPIView.as_view(), name='proparty_images'),
+    path("delete/<id>", PropertyDeleteAPIView.as_view(), name='delete_proparty'),
+    path("update/<id>", PropertyUpdateAPIView.as_view(), name='update_proparty'),
+    path("<id>/", PropartyDetailAPIView.as_view(), name='proparty_detail'),
 ]
