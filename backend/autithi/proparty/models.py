@@ -11,10 +11,9 @@ from autithi.utils.location import upload_location
 class Proparty(models.Model):
     host = models.ForeignKey(User, related_name='propartys', on_delete=models.CASCADE,)
     city = models.ForeignKey(City, related_name='propartys', on_delete=models.CASCADE,)
-
     address = models.OneToOneField(Address, related_name='propartys', on_delete=models.CASCADE, null=True, blank=True)
-    
     recommendation = models.ForeignKey(Recommendation, related_name='propartys', on_delete=models.CASCADE, null=True, blank=True)
+    
     title = models.CharField(max_length=255,null=True, blank=True)
     slug = models.SlugField()
     description = models.TextField(null=True, blank=True)

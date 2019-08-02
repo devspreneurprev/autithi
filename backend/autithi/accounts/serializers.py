@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from .models import User
 from rest_framework.serializers import (
@@ -11,10 +11,66 @@ from rest_framework.serializers import (
 )
 
 
-class UserDetailSerializer(ModelSerializer):
+class UserDetailSerializer(serializers.ModelSerializer):
+    profile_image = serializers.SerializerMethodField()
+    id_image1 = serializers.SerializerMethodField()
+    id_image2 = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = '__all__'
+        fields = (
+            "full_name",
+            "email",
+            # "is_email_verified",
+            "username",
+            "date_of_birth",
+            "phone_number",
+            # "is_phone_number_verified",
+            # "address",
+            "profile_image",
+            "description",
+            "profession",
+            "id_image1",
+            "id_image2",
+            "id_type",
+            "facebook",
+            "twitter",
+            "linkedin",
+            # "is_verified",
+            # "is_active",
+            # "is_staff",
+            # "is_admin",
+            "created_at",
+            "updated_at",
+        )
+        read_only_fields = (
+            "created_at",
+            "updated_at",
+        )
+
+    def get_profile_image(self, profile_image):
+        try:
+            request = self.context.get('request')
+            profile_image_url = profile_image.profile_image.url
+            return request.build_absolute_uri(profile_image_url)
+        except Exception as error:
+            print(error)
+
+    def get_id_image1(self, id_image1):
+        try:
+            request = self.context.get('request')
+            id_image1_url = id_image1.id_image1.url
+            return request.build_absolute_uri(id_image1_url)
+        except Exception as error:
+            print(error)
+
+    def get_id_image2(self, id_image2):
+        try:
+            request = self.context.get('request')
+            id_image2_url = id_image2.id_image2.url
+            return request.build_absolute_uri(id_image2_url)
+        except Exception as error:
+            print(error)
 
 # class UserProfileUpdateSerializer(Serializer):
 #     class Meta:
@@ -24,7 +80,8 @@ class UserDetailSerializer(ModelSerializer):
 #             'full_name',
 #         )
 
-class UserCreateSerializer(ModelSerializer):
+
+class UserCreateSerializer(serializers.ModelSerializer):
     password1 = CharField(label='Password')
     password2 = CharField(label='Confirm Password')
 
@@ -78,7 +135,7 @@ def create_username(email):
     return email
 
 
-class UserLoginSerializer(ModelSerializer):
+class UserLoginSerializer(serializers.ModelSerializer):
     token = CharField(allow_blank=True, read_only=True)
     email = EmailField(label='Email Address')
 

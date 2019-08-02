@@ -34,7 +34,6 @@ class PropartyImageSerializer(serializers.ModelSerializer):
         )
 
     def get_photo_url(self, proparty_image):
-        print("In PropartyImageSerializer")
         request = self.context.get('request')
         photo_url = proparty_image.image.url
         return request.build_absolute_uri(photo_url)
