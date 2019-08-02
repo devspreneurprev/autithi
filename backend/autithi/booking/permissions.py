@@ -9,7 +9,7 @@ from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 class IsOwnerAndAuth(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
         try:
-            return obj.user.user == request.user
+            return obj.user == request.user
         except:
             return False
 
