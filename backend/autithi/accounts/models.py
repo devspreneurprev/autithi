@@ -69,6 +69,7 @@ class Address(models.Model):
     country = models.CharField(max_length=255, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+    active = models.BooleanField(default=True)
 
     objects = AddressManager()
 
@@ -118,11 +119,11 @@ class User(AbstractBaseUser):
     phone_number = models.CharField(max_length=255, null=True, blank=True)
     is_phone_number_verified = models.BooleanField(default=False, null=True, blank=True)
     address = models.OneToOneField(Address, related_name='users', on_delete=models.CASCADE, null=True, blank=True)
-    profile_image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
+    profile_image = models.ImageField(upload_to=upload_location, null=True, blank=True)
     description = models.TextField(max_length=255, null=True, blank=True)
     profession = models.CharField(max_length=255, null=True, blank=True)
-    id_image1 = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
-    id_imege2 = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
+    id_image1 = models.ImageField(upload_to=upload_location, null=True, blank=True)
+    id_image2 = models.ImageField(upload_to=upload_location, null=True, blank=True)
     id_type = models.IntegerField(null=True, blank=True)  # 1=NID, 2=PID, 3=DL_ID
     facebook = models.CharField(max_length=255, null=True, blank=True)
     twitter = models.CharField(max_length=255, null=True, blank=True)
@@ -142,7 +143,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return str(self.username)
+        return str(self.email)
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

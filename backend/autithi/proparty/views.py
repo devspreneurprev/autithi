@@ -1,65 +1,105 @@
-from django.shortcuts import render
-from rest_framework.response import Response
-import jwt
-# Create your views here.
-from .serializers import (
-    PropartyListSerializer,
-    PropartyDetailSerializer
+from django.db.models import Q
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly
 )
 from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
-    RetrieveAPIView
+    RetrieveAPIView,
+    RetrieveDestroyAPIView,
+    RetrieveUpdateAPIView
 )
-from rest_framework.views import APIView
-from rest_framework.permissions import (AllowAny, IsAuthenticated)
-from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.filters import (
+    SearchFilter,
+    OrderingFilter,
+)
 
-# User defined import
-from .models import Proparty
-from accounts.models import User
+# Create your views here.
+from .models import (
+    Proparty,
+    PropartyImage
+)
+from .serializers import (
+    PropartyListSerializer,
+    PropartyDetailSerializer,
+    PropartyImageSerializer,
+)
+from .permissions import IsOwnerOrReadOnly
+from .pagination import (
+    PostLimitOffsetPagination,
+    PostPageNumberPagination
+)
 
 
 class PropartyListAPIView(ListAPIView):
-    # def post(self, request):
-    #     data = {}
-    #     data["token"] = request.GET.get('Authorization')
-    #     queryset = Proparty.objects.all()
-    #     data["data"] = queryset
-    #     print("post -> ", data)
-    #     return Response(data)
-
-    # def get(self, request):
-    #     data = {}
-    #     data["token"] = request.GET.get('Authorization')
-    #     queryset = Proparty.objects.all()
-    #     data["data"] = queryset
-    #     print("get -> ", request.GET.get("foo"))
-    #     return Response(queryset)
-
-    # def get_queryset(self):
-    #     token = self.request.GET.get("foo")
-    #     decodedPayload = jwt.decode(token,None,None)
-    #     print("get_queryset -> ", token , "\n", decodedPayload,"\n\n")
-    #     queryset = Proparty.objects.all()
-    #     return queryset
-
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['title', 'content', 'user__first_name']
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = PostPageNumberPagination  # PageNumberPagination
     serializer_class = PropartyListSerializer
-    queryset = Proparty.objects.all()
-    permission_classes = [AllowAny]
+
+    def get_queryset(self, *args, **kwargs):
+        queryset_list = Proparty.objects.all()
+        query = self.request.GET.get("q")
+        print(query)
+        if query:
+            queryset_list = queryset_list.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query) |
+                Q(address__address__icontains=query)
+            ).distinct()
+        return queryset_list
 
 
 class PropartyDetailAPIView(RetrieveAPIView):
     queryset = Proparty.objects.all()
     serializer_class = PropartyDetailSerializer
     lookup_field = 'id'
-    permission_classes = [AllowAny]
+    permission_classes = [IsOwnerOrReadOnly]
 
-class PropertyCreateAPIView(APIView):
-    serializer_class = PropartyListSerializer
+
+class PropertyCreateAPIView(CreateAPIView):
+    queryset = Proparty.objects.all()
+    serializer_class = PropartyDetailSerializer
     permission_classes = [IsAuthenticated]
 
-    
+
+class PropertyDeleteAPIView(RetrieveDestroyAPIView):
+    queryset = Proparty.objects.all()
+    serializer_class = PropartyDetailSerializer
+    lookup_field = 'id'
+    permission_classes = [IsOwnerOrReadOnly]
 
 
+class PropertyUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = Proparty.objects.all()
+    serializer_class = PropartyDetailSerializer
+    lookup_field = 'id'
+    permission_classes = [IsOwnerOrReadOnly]
+
+
+class PropartyImageListAPIView(ListAPIView):
+    lookup_field = 'id'
+    serializer_class = PropartyImageSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs[self.lookup_field]
+        if not id:
+            return None
+        queryset_list = PropartyImage.objects.filter(proparty=id)
+        return queryset_list
+
+class UserPropartyListAPIView(ListAPIView):
+    lookup_field = 'id'
+    serializer_class = PropartyListSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs[self.lookup_field]
+        if not id:
+            return None
+        queryset_list = Proparty.objects.filter(host=id)
+        return queryset_list

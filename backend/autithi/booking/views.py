@@ -1,5 +1,11 @@
 import datetime
 from rest_framework.views import APIView
+from rest_framework.generics import (
+    ListAPIView,
+    RetrieveAPIView,
+    RetrieveUpdateAPIView,
+    RetrieveDestroyAPIView
+)
 from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -9,11 +15,16 @@ from proparty.models import Proparty
 from accounts.models import User
 from trip.models import Trip
 from notification.models import Notification
+from .serializers import BookingDateSerializers
+
+from .mixins import LoginRequiredMixin
+from .permissions import IsOwnerAndAuth
 
 
 class BookingRequestAPIView(APIView):
     # serializer_class = PropartyListSerializer
     # queryset = Proparty.objects.all()
+    # permission_classes = [AllowAny]
     permission_classes = [AllowAny]
 
     def date_in_range(self, begin_date, end_date, date):
@@ -35,6 +46,7 @@ class BookingRequestAPIView(APIView):
 
     # parameter = (proparty_id, begin_date, end_date, guest_user)
     def get(self, request):
+        print(self.request.user)
         queryset = Booking.objects.all()
         proparty_id = self.request.GET.get("proparty_id")
 
@@ -69,9 +81,9 @@ class BookingRequestAPIView(APIView):
                         )
                         # here notify the host
             else:
-                Response("User is not varified")
+                return Response("User is not varified")
         else:
-            Response("User is not logedin")
+            return Response("User is not logedin")
         return Response("Booking completed. Please wait for confirmation")
 
     def post(self, request):
@@ -129,8 +141,8 @@ class BookingAcceptedAPIView(APIView):
 
 class BookingCancelingAPIView(APIView):
     permission_classes = [AllowAny]
-    # parameter = (booking_id, )
 
+    # parameter = (booking_id, )
     def get(self, request):
         booking_id = request.GET.get("booking_id")
 
@@ -149,16 +161,14 @@ class BookingCancelingAPIView(APIView):
         return Response(" Cancel confirm ")
 
 
-class BookingDateAPIView(APIView):
+class BookingDateAPIView(ListAPIView):
+    lookup_field = 'id'
+    serializer_class = BookingDateSerializers
     permission_classes = [AllowAny]
 
-    # parameter = (proparty_id)
-    def get(self, request):
-        proparty_id = self.request.GET.get("proparty_id")
-        booking_instance = Booking.objects.filter(proparty=proparty_id, request_accepted_by_host=True)
-        booking_date_list = []
-        print(booking_instance)
-        for booking in booking_instance:
-            booking_date_list.append((booking.begin_date, booking.end_date))
-        print(booking_date_list)
-        return JsonResponse({'booking_date_list': booking_date_list})
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs[self.lookup_field]
+        if not id:
+            return None
+        booking_instance = Booking.objects.filter(proparty=id, request_accepted_by_host=True)
+        return booking_instance

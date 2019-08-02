@@ -11,10 +11,9 @@ from autithi.utils.location import upload_location
 class Proparty(models.Model):
     host = models.ForeignKey(User, related_name='propartys', on_delete=models.CASCADE,)
     city = models.ForeignKey(City, related_name='propartys', on_delete=models.CASCADE,)
-
     address = models.OneToOneField(Address, related_name='propartys', on_delete=models.CASCADE, null=True, blank=True)
-    
     recommendation = models.ForeignKey(Recommendation, related_name='propartys', on_delete=models.CASCADE, null=True, blank=True)
+    
     title = models.CharField(max_length=255,null=True, blank=True)
     slug = models.SlugField()
     description = models.TextField(null=True, blank=True)
@@ -39,10 +38,9 @@ class Proparty(models.Model):
 
 
 class PropartyImage(models.Model):
-    proparty = models.ForeignKey(Proparty, on_delete=models.CASCADE)
+    proparty = models.ForeignKey(Proparty, related_name='propartyimage', on_delete=models.CASCADE)
     caption = models.TextField()
-    image = models.ImageField(upload_to=upload_location, null=True,
-                              blank=True, )
+    image = models.ImageField(upload_to=upload_location, null=True,blank=True, )
     created_at = models.DateField(auto_now_add=True,)
     updated_at = models.DateField(auto_now=True,)
 
