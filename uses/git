@@ -24,6 +24,9 @@ Push an existing Git repository:
     git remote add origin git@gitlab.com:nayan32biswas/Demo.git
     git push -u origin --all
     git push -u origin --tags
+create git branch:
+    git branch <name_of_your_new_branch>
+
 
 Git merge two branch:
     git checkout master (you will switch to branch master)
