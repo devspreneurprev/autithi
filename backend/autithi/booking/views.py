@@ -12,7 +12,10 @@ from notification.models import Notification
 
 from .mixins import LoginRequiredMixin
 from .permissions import IsOwnerAndAuth
+<<<<<<< HEAD
 
+=======
+>>>>>>> nayan
 
 class BookingRequestAPIView(APIView):
     # serializer_class = PropartyListSerializer

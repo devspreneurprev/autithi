@@ -9,12 +9,17 @@ from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 class IsOwnerAndAuth(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
         try:
+<<<<<<< HEAD
             print(self.request)
             return obj.user.user == self.request['user']
+=======
+            return obj.user.user == request.user
+>>>>>>> nayan
         except:
             return False
 
     def has_permission(self, request, view):
+<<<<<<< HEAD
         print(request.GET)
         token_bearer = request.META.get('HTTP_AUTHORIZATION')
         token = token_bearer.split(" ")
@@ -34,4 +39,8 @@ class IsOwnerAndAuth(IsAuthenticated):
             print("True")
             return True
         print("False")
+=======
+        if request.user and request.user.is_authenticated:
+            return True
+>>>>>>> nayan
         return False

@@ -23,6 +23,7 @@ class UserAdmin(BaseUserAdmin):
         'date_of_birth',
         'is_admin',
         'is_verified',
+        'profile_image',
     )
     list_filter = ('is_admin',)
     fieldsets = (
@@ -35,7 +36,7 @@ class UserAdmin(BaseUserAdmin):
         (
             'Personal info',
             {
-                'fields': ('date_of_birth',)
+                'fields': ('date_of_birth','profile_image')
             }
         ),
         (
