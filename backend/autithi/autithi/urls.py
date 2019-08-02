@@ -19,12 +19,11 @@ urlpatterns = [
     path('api/booking/', include('booking.urls')),
     path('api/search/', include('search.urls')),
     path('api/notification/', include('notification.urls')),
-    
+
     # path('api/token/auth/', obtain_jwt_token),
     path('api/token/refresh/', refresh_jwt_token),
     path('api/token/verify/', verify_jwt_token),
 ]
-
 
 
 if settings.DEBUG:
