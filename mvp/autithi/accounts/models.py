@@ -9,10 +9,21 @@ import datetime
 
 
 # User import
-from city.models import City
 from autithi.utils.location import upload_location
 
 EMAIL_REGEX = '^[a-z0-9.@]*$'
+
+
+class City(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
+    description = models.TextField()
+    views = models.IntegerField()
+    created_at = models.DateField(auto_now_add=True,)
+    updated_at = models.DateField(auto_now=True,)
+
+    def __str__(self):
+        return self.name
 
 
 class AddressQuerySet(models.query.QuerySet):
