@@ -120,7 +120,7 @@ class User(AbstractBaseUser):
     is_phone_number_verified = models.BooleanField(default=False, null=True, blank=True)
     address = models.OneToOneField(Address, related_name='users', on_delete=models.CASCADE, null=True, blank=True)
     profile_image = models.ImageField(upload_to=upload_location, null=True, blank=True)
-    description = models.TextField(max_length=255, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
     profession = models.CharField(max_length=255, null=True, blank=True)
     id_image1 = models.ImageField(upload_to=upload_location, null=True, blank=True)
     id_image2 = models.ImageField(upload_to=upload_location, null=True, blank=True)
