@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section id="body-section">
+    <div class="container" style="padding-top: 55px;">
+        {% for city_proparty in city_propartys %}
+        <h1>{{city_proparty.area}}</h1>
+        <div class="row">
+            {% for proparty in city_proparty.propartys %}
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 p-1">
+                <a href="../autithi inside/index.html"> <img src="{{ proparty.image.url }}" alt="" class="w-100 img-fluid">
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title p-0 m-0 font-weight-bold">{{ proparty.title }}</h6>
+                            <!-- <p class="card-text p-0 m-0">{{ proparty.description }}</p> -->
+                            <p class="card-text p-0 m-0">{{ proparty.cost_per_unit }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}
+

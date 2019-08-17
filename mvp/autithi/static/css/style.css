@@ -1,0 +1,310 @@
+/* Search Box and responsive start */
+nav .search-box {
+    width: 300px;
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    nav .search-box {
+        padding-top: 20px;
+        margin: 0;
+    }
+}
+
+/* Search Box and responsive End */
+
+/* Navbar and Navbar responsive Start*/
+.top-nav-collapse {
+    background-color: #9da4b1 !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+    background: transparent !important;
+}
+
+@media (max-width: 768px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #9da4b1 !important;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #9da4b1 !important;
+    }
+}
+
+/* Navbar and Navbar responsive End*/
+
+.modal-backdrop {
+    z-index: 0;
+}
+
+/* Navigation Button Css start */
+.bar1,
+.bar2,
+.bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+/* Navigation Button Css End */
+
+/* Body part Start */
+#body-section {
+    background: url(../img/bannerh.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh !important;
+    padding: 0px 0px 50px 0px;
+    position: relative;
+    padding-top: 120px;
+}
+
+#body-section:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+}
+
+#body-section .body-inner .form {
+    border: 2px solid rgb(85, 76, 76);
+    padding: 35px 25px;
+    border-radius: 8px;
+    background: #fff;
+    opacity: 0.8;
+}
+
+/* Body part End */
+
+/* Top cities image hover settings and responsive start */
+.ih-item {
+    position: relative;
+    -webkit-transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+.ih-item,
+.ih-item * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.ih-item a {
+    color: #333;
+}
+.ih-item a:hover {
+    text-decoration: none;
+}
+.ih-item img {
+    width: 100%;
+    height: 100%;
+}
+.ih-item.square {
+    position: relative;
+    width: 185px;
+    height: 200px;
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+.ih-item.square .info {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.ih-item.square.effect6 {
+    overflow: hidden;
+}
+
+.ih-item.square.effect6.colored .info h3 {
+    background: rgba(12, 34, 52, 0.6);
+}
+.ih-item.square.effect6 .img {
+    -webkit-transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+
+.ih-item.square.effect6 .info h3 {
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    font-size: 17px;
+    padding: 10px;
+    background: #111111;
+    margin: 30px 0 0 0;
+}
+
+.ih-item.square.effect6 a:hover .img {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+    opacity: 0.6;
+}
+
+
+@media(max-width: 992px) {
+    #body-section .body-inner .form {
+        margin-bottom: 50px;
+    }
+
+    /* .ih-item.square {
+        position: relative;
+        width: 210px;
+        height: 235px;
+        border: 1px solid #fff;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    } */
+}
+
+@media(max-width: 767px) {
+    .ih-item.square {
+        width: 150px;
+        height: 168px;
+    }
+}
+
+@media(max-width: 576px) {
+    .ih-item.square {
+        width: 150px;
+        height: 170px;
+    }
+}
+@media(max-width: 540px) {
+    .ih-item.square {
+        width: 140px;
+        height: 155px;
+    }
+}
+@media(max-width: 500px) {
+    .ih-item.square {
+        width: 120px;
+        height: 135px;
+    }
+}
+@media(max-width: 460px) {
+    .ih-item.square {
+        width: 110px;
+        height: 125px;
+    }
+}
+/* @media(max-width: 460px) {
+    .ih-item.square {
+        width: 90px;
+        height: 100px;
+    }
+} */
+
+@media(max-width: 437px) {
+    .ih-item.square {
+        width: 100px;
+        height: 110px;
+    }
+}
+@media(max-width: 375px) {
+    .ih-item.square {
+        width: 90px;
+        height: 100px;
+    }
+}
+@media(max-width: 330px) {
+    .ih-item.square {
+        width: 70px;
+        height: 80px;
+    }
+}
+
+/* Top cities image hover settings and responsive end */
+
+/*recommendation*/
+/* rfu = recommendation for you*/
+#recommendation .rfu {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+#recommendation .rfu {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+#recommendation .rfu a {
+    color: white;
+}
+
+#recommendation h4 {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#recommendation p {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+}
+
+@media(min-width: 992px) and (max-width: 1200px) {
+    #recommendation p {
+        font-size: 9px;
+    }
+}
+
+@media(max-width: 542px) {
+    #recommendation p {
+        font-size: 9px;
+    }
+}
+
+@media(max-width: 490px) {
+    #recommendation p {
+        font-size: 8px;
+    }
+}
+
+@media(max-width: 437px) {
+    #recommendation p {
+        font-size: 6px;
+    }
+}

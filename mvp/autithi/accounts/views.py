@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
+from django.views.generic.list import ListView
+
 from .forms import UserLoginForm, UserRegisterForm
+from proparty.models import Proparty, PropartyImage, City
+
 # Create your views here.
 from django.contrib.auth import (
     authenticate,
@@ -34,11 +38,11 @@ def registration_view(request):
         password = form.cleaned_data.get('password')
         user.set_password(password)
         user.save()
-        new_user = authenticate(username=user.username, password=password)
-        login(request, new_user)
+        # new_user = authenticate(username=user.username, password=password)
+        # login(request, new_user)
         if next:
             return redirect(next)
-        return redirect("/")
+        return redirect("/account/login")
     context = {
         "form": form
     }
@@ -53,3 +57,14 @@ def logout_view(request):
 def home_view(request):
     context = {}
     return render(request, "accounts/home.html", context)
+
+
+class HomePageView(ListView):
+    model = City
+    template_name = 'city_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+

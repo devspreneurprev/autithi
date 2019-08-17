@@ -58,7 +58,7 @@ class Address(models.Model):
     street = models.CharField(max_length=120, null=True, blank=True)
     postal_code = models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=255, null=True, blank=True)
-    city = models.CharField(max_length=255, default="Dhaka")
+    city = models.CharField(max_length=255, null=True, blank=True)
     country = models.CharField(max_length=255, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
@@ -67,6 +67,8 @@ class Address(models.Model):
     objects = AddressManager()
 
     def __str__(self):
+        if not self.city:
+            return "None"
         return self.city
 
 
