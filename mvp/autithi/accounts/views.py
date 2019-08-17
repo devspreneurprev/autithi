@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import UserLoginForm, UserRegisterForm
-
 from django.views.generic.list import ListView
+
+from .forms import UserLoginForm, UserRegisterForm
 from proparty.models import Proparty, PropartyImage, City
 
 # Create your views here.
@@ -68,32 +68,3 @@ class HomePageView(ListView):
         return context
 
 
-class PropertyListView(ListView):
-    model = Proparty
-    template_name = 'property_list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        obj = Proparty.objects.filter(address__city='sylhet')
-        obj2 = Proparty.objects.filter(address__city='dhanmondi')
-        context['obj'] = obj
-        context['obj2'] = obj2
-        print(obj)
-        return context
-
-
-# class PropertyListView(ListView):
-#     model = Proparty
-#     template_name = 'property_list.html'
-
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-
-#         city_list = Address.objects.order_by().values_list('city').distinct()
-#         city_list = [each_city[0] for each_city in city_list]
-#         context["city_list"] = city_list
-#         for each_city in city_list:
-#             if each_city:
-#                 obj = Proparty.objects.filter(address__city=each_city)
-#         return context
