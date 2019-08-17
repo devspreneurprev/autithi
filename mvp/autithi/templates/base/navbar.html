@@ -6,7 +6,13 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top scrolling-navbar">
   <a class="navbar-brand" href="{{ home_url }}">
     <img src="//getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-    {% if brand_name %} {{brand_name }} {% else %}Blog {% endif %}
+    {% if brand_name %} {{brand_name }} {% else %}Autithi {% endif %}
+    <div>
+      link
+      <p>->{{ login_url }}.</p>
+      <p>->{{ logout_url }}.</p>
+      <p>->{{ register_url }}.</p>
+    </div>
   </a>
   <!-- Button Start -->
   <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -100,7 +106,6 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ login_url }}">Log In</a>
-        <p>d{{ login_url }}</p>
       </li>
       {% endif %}
     </ul>
