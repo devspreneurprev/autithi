@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserLoginForm, UserRegisterForm
 
 from django.views.generic.list import ListView
-
-from .models import City
-from proparty.models import Proparty, PropartyImage
+from proparty.models import Proparty, PropartyImage, City
 
 # Create your views here.
 from django.contrib.auth import (
