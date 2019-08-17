@@ -104,6 +104,7 @@ class UserManager(BaseUserManager):
             username,
             password=password,
         )
+        user.is_active = True
         user.is_staff = True
         user.is_admin = True
         user.save(using=self._db)
