@@ -58,13 +58,16 @@ class Address(models.Model):
     street = models.CharField(max_length=120, null=True, blank=True)
     postal_code = models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=255, null=True, blank=True)
-    city = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, default="Dhaka")
     country = models.CharField(max_length=255, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     active = models.BooleanField(default=True)
 
     objects = AddressManager()
+
+    def __str__(self):
+        return self.city
 
 
 class UserManager(BaseUserManager):
