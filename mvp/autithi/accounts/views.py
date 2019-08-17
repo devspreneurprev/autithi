@@ -38,11 +38,11 @@ def registration_view(request):
         password = form.cleaned_data.get('password')
         user.set_password(password)
         user.save()
-        new_user = authenticate(username=user.username, password=password)
-        login(request, new_user)
+        # new_user = authenticate(username=user.username, password=password)
+        # login(request, new_user)
         if next:
             return redirect(next)
-        return redirect("/")
+        return redirect("/account/login")
     context = {
         "form": form
     }
