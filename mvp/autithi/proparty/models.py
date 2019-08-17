@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from django.urls import reverse
 # User import
 from accounts.models import User, Address
 from autithi.utils.location import upload_location
@@ -20,6 +21,9 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("accounts:city", kwargs={"id": self.id})
+
 
 class Proparty(models.Model):
     host = models.ForeignKey(User, related_name='propartys', on_delete=models.CASCADE,)
@@ -30,6 +34,7 @@ class Proparty(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField(null=True, blank=True)
 
+    image = models.ImageField(upload_to=upload_location, null=True, blank=True, )
     cost_per_unit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     place_type = models.CharField(max_length=255, null=True, blank=True)
     rental_type = models.CharField(max_length=255, null=True, blank=True)
@@ -44,6 +49,9 @@ class Proparty(models.Model):
 
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+
+    def first_image(self):
+        return self.propartyimage[0]
 
     def __str__(self):
         return str(self.title)
