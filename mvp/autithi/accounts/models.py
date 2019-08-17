@@ -14,18 +14,6 @@ from autithi.utils.location import upload_location
 EMAIL_REGEX = '^[a-z0-9.@]*$'
 
 
-class City(models.Model):
-    name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
-    description = models.TextField()
-    views = models.IntegerField()
-    created_at = models.DateField(auto_now_add=True,)
-    updated_at = models.DateField(auto_now=True,)
-
-    def __str__(self):
-        return self.name
-
-
 class AddressQuerySet(models.query.QuerySet):
     def active(self):
         return self.filter(active=True)
@@ -126,7 +114,7 @@ class User(AbstractBaseUser):
         ]
     )
     is_email_verified = models.BooleanField(default=False, null=True, blank=True)
-    username = models.CharField(max_length=255, null=True, blank=True)
+    username = models.CharField(unique=True, max_length=255, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=255, null=True, blank=True)
     is_phone_number_verified = models.BooleanField(default=False, null=True, blank=True)

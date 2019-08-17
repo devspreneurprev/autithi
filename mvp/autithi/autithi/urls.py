@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name="home"),
     path('account/', include('accounts.urls')),
-    path('product/', include('proparty.urls')),
+    path('proparty/', include('proparty.urls')),
 ]
 
 if settings.DEBUG:
