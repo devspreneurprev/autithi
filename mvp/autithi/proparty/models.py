@@ -22,7 +22,7 @@ class City(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("accounts:city", kwargs={"id": self.id})
+        return reverse("proparty:city", kwargs={"id": self.id})
 
 
 class Proparty(models.Model):
