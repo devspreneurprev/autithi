@@ -18,9 +18,6 @@ class AddressQuerySet(models.query.QuerySet):
     def active(self):
         return self.filter(active=True)
 
-    def featured(self):
-        return self.filter(featured=True, active=True)
-
     def search(self, query):
         lookups = (
             Q(title__icontains=query) |
@@ -37,9 +34,6 @@ class AddressManager(models.Manager):
 
     def all(self):
         return self.get_queryset().active()
-
-    def featured(self):  # Product.objects.featured()
-        return self.get_queryset().featured()
 
     def get_by_id(self, id):
         qs = self.get_queryset().filter(id=id)  # Product.objects == self.get_queryset()
@@ -100,7 +94,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    full_name = models.CharField(max_length=255, null=True, blank=True)
+    full_name = models.CharField(max_length=255, default="No One")
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -143,7 +137,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return str(self.email)
+        return str(self.full_name)
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

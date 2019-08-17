@@ -10,13 +10,10 @@ class PropartyDetailView(DetailView):
 
     def get_queryset(self):
         instance = super().get_queryset()
-        images = PropartyImage.objects.filter(proparty=instance[0].id)
-        #  print(instance)
-        # print(instance[0].id)
-        instance["images"] = images
         return instance
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(type(context.get('object')))
+        image_list = PropartyImage.objects.filter(proparty=context['object'].id)
+        context['image_list'] = image_list
         return context
