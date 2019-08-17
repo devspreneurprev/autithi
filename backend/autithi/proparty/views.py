@@ -81,6 +81,25 @@ class PropertyUpdateAPIView(RetrieveUpdateAPIView):
 
 
 class PropartyImageListAPIView(ListAPIView):
-    queryset = PropartyImage.objects.all()
+    lookup_field = 'id'
     serializer_class = PropartyImageSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs[self.lookup_field]
+        if not id:
+            return None
+        queryset_list = PropartyImage.objects.filter(proparty=id)
+        return queryset_list
+
+class UserPropartyListAPIView(ListAPIView):
+    lookup_field = 'id'
+    serializer_class = PropartyListSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs[self.lookup_field]
+        if not id:
+            return None
+        queryset_list = Proparty.objects.filter(host=id)
+        return queryset_list

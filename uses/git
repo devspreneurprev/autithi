@@ -25,7 +25,14 @@ Push an existing Git repository:
     git push -u origin --all
     git push -u origin --tags
 
+
+create git branch:
+    git branch <name_of_your_new_branch>
+
+delete git branch:
+    git branch -D <name_of_your_new_branch>
+
 Git merge two branch:
-    git checkout a (you will switch to branch a)
-    git merge b (this will merge all changes from branch b into branch a)
+    git checkout master (you will switch to branch master)
+    git merge common (this will merge all changes from branch common into branch master)
     git commit -a (this will commit your changes)

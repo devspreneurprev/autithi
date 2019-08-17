@@ -10,11 +10,15 @@ class IsOwnerAndAuth(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
         try:
 <<<<<<< HEAD
+<<<<<<< HEAD
             print(self.request)
             return obj.user.user == self.request['user']
 =======
             return obj.user.user == request.user
 >>>>>>> nayan
+=======
+            return obj.user == request.user
+>>>>>>> master
         except:
             return False
 
