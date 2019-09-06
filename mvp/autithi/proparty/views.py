@@ -16,7 +16,8 @@ class PropartyDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        image_list = PropartyImage.objects.filter(proparty=context['object'].id)
+        image_list = PropartyImage.objects.filter(
+            proparty=context['object'].id)
         context['image_list'] = image_list
         return context
 
@@ -50,7 +51,8 @@ class CityPropertyListView(ListView):
             if each_area:
                 each = dict()
                 each["area"] = each_area
-                each["propartys"] = Proparty.objects.filter(address__area=each_area)
+                each["propartys"] = Proparty.objects.filter(
+                    address__area=each_area)
                 city_propartys.append(each)
         context["city_propartys"] = city_propartys
         return context

@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly
+)
 from django.http import JsonResponse
 
 
@@ -14,7 +18,7 @@ from review.models import Comment
 
 
 class CreatePropartyReviewByUserApiView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # host, user, proparty_id, text, score
     def post(self, request):
@@ -53,7 +57,7 @@ class CreatePropartyReviewByUserApiView(APIView):
 
 
 class CreateUserReviewByHostApiView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # host, user, text, score
     def post(self, request):
@@ -84,7 +88,7 @@ class CreateUserReviewByHostApiView(APIView):
 
 
 class CreateCommentView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # user_id, review_id, text
     def post(self, request):
@@ -106,7 +110,7 @@ class CreateCommentView(APIView):
 
 
 class PropartyReviewListApiView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # proparty_id
     def get(self, request):
@@ -134,7 +138,7 @@ class PropartyReviewListApiView(APIView):
 
 
 class UserReviewListApiView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # user
     def get(self, request):
