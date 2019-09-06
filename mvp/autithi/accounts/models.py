@@ -14,24 +14,9 @@ from autithi.utils.location import upload_location
 EMAIL_REGEX = '^[a-z0-9.@]*$'
 
 
-class City(models.Model):
-    name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to=upload_location, null=True, blank=True, width_field="width_field", height_field="height_field")
-    description = models.TextField()
-    views = models.IntegerField()
-    created_at = models.DateField(auto_now_add=True,)
-    updated_at = models.DateField(auto_now=True,)
-
-    def __str__(self):
-        return self.name
-
-
 class AddressQuerySet(models.query.QuerySet):
     def active(self):
         return self.filter(active=True)
-
-    def featured(self):
-        return self.filter(featured=True, active=True)
 
     def search(self, query):
         lookups = (
@@ -49,9 +34,6 @@ class AddressManager(models.Manager):
 
     def all(self):
         return self.get_queryset().active()
-
-    def featured(self):  # Product.objects.featured()
-        return self.get_queryset().featured()
 
     def get_by_id(self, id):
         qs = self.get_queryset().filter(id=id)  # Product.objects == self.get_queryset()
@@ -84,6 +66,11 @@ class Address(models.Model):
 
     objects = AddressManager()
 
+    def __str__(self):
+        if not self.city:
+            return "None"
+        return self.city
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -104,6 +91,7 @@ class UserManager(BaseUserManager):
             username,
             password=password,
         )
+        user.is_active = True
         user.is_staff = True
         user.is_admin = True
         user.save(using=self._db)
@@ -111,7 +99,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    full_name = models.CharField(max_length=255, null=True, blank=True)
+    full_name = models.CharField(max_length=255, default="No One")
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -125,7 +113,7 @@ class User(AbstractBaseUser):
         ]
     )
     is_email_verified = models.BooleanField(default=False, null=True, blank=True)
-    username = models.CharField(max_length=255, null=True, blank=True)
+    username = models.CharField(unique=True, max_length=255, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=255, null=True, blank=True)
     is_phone_number_verified = models.BooleanField(default=False, null=True, blank=True)
@@ -154,7 +142,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return str(self.email)
+        return str(self.username)
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

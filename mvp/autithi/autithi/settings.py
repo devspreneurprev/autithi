@@ -38,10 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third party
+    'crispy_forms',
+    'widget_tweaks',
 
+    # user app
     'accounts',
     'proparty',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
+# LOGIN_URL = '/login/'
+# LOGIN_URL_REDIRECT = '/'
+# LOGOUT_URL = '/logout/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

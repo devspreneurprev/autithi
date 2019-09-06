@@ -18,7 +18,7 @@ class NotificationAPIView(APIView):
         # proparty_title = self.request.GET.get("proparty_title")
         user = User.objects.get(email="nayan32biswas@gmail.com")
         print(user)
-        notifications = Notification.objects.filter(user=user, checked=False)
+        notifications = Notification.objects.filter(user=user)
         print(notifications)
         data = []
         for each in notifications:

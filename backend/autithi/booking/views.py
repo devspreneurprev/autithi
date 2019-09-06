@@ -6,7 +6,11 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
     RetrieveDestroyAPIView
 )
-from rest_framework.permissions import (AllowAny, IsAuthenticated)
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly
+)
 from rest_framework.response import Response
 from django.http import JsonResponse
 
@@ -28,8 +32,7 @@ from .permissions import IsOwnerAndAuth
 class BookingRequestAPIView(APIView):
     # serializer_class = PropartyListSerializer
     # queryset = Proparty.objects.all()
-    # permission_classes = [AllowAny]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def date_in_range(self, begin_date, end_date, date):
         return begin_date <= date <= end_date
@@ -101,7 +104,7 @@ class BookingRequestAPIView(APIView):
 
 
 class BookingAcceptedAPIView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def varifie_booking_date(self, begin_date, end_date, bookings):
 
@@ -150,7 +153,7 @@ class BookingAcceptedAPIView(APIView):
 
 
 class BookingCancelingAPIView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     # parameter = (booking_id, )
     def get(self, request):

@@ -1,0 +1,456 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!-- Body Section Start-->
+<section id="body-section">
+	<div class="container body-inner">
+		<div class="row">
+			<!-- Form Part Start -->
+			<div class="col-lg-5 text-info">
+				<div class="form">
+					<h2 class="text-center">Category</h2>
+					<hr>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero aliquid inventore id
+						similique optio placeat atque commodi eos cum minima fugit, odit asperiores tenetur eius
+						esse! Iste laborum sed numquam recusandae explicabo, inventore dignissimos officia? Ab ad
+						molestiae saepe! Distinctio minus debitis tempore, magnam quod illo ex porro. Ad quis
+						doloremque facilis unde similique culpa earum consequuntur fugiat vitae ratione.</p>
+				</div>
+			</div>
+			<!-- Form Part End-->
+
+			<!-- Top cities start -->
+			<div class="col-lg-7">
+
+				<div class="row">
+					{% for city in object_list %}
+					<div class='col-xs-3'>
+						<div class="ih-item square colored effect6 from_top_and_bottom">
+							<h3>{{ city.name }}</h3>
+							<a href='{{ city.get_absolute_url }}'><img src="{{ city.image.url }}" alt="img"></a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div> <!-- Top cities End -->
+		</div>
+	</div>
+</section>
+
+
+
+<!-- Recommendation Start -->
+<section id="recommendation">
+	<div class="container py-5">
+		<h2 class="pb-3 text-center">Dhanmondi</h2>
+		<div class="rfu">
+			<div class="row">
+				<div class="col-lg-2 col-md-4 col-4 pb-md-3 pb-3">
+					<a href="../autithi inside/index.html"> <img src="../static/img/11.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/22.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/44.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/66.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="rfu pt-2">
+			<div class="row">
+				<div class="col-lg-2 col-md-4 col-4 pb-md-3 pb-3">
+					<a href="../autithi inside/index.html"> <img src="../static/img/11.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/22.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/44.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/66.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section id="recommendation">
+	<div class="container">
+		<h2 class="pb-3 text-center">Jatrabari</h2>
+		<div class="rfu">
+			<div class="row">
+				<div class="col-lg-2 col-md-4 col-4 pb-md-3 pb-3">
+					<a href="../autithi inside/index.html"> <img src="../static/img/11.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/22.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/44.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/66.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="rfu pt-2">
+			<div class="row">
+				<div class="col-lg-2 col-md-4 col-4 pb-md-3 pb-3">
+					<a href="../autithi inside/index.html"> <img src="../static/img/11.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/22.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/44.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/66.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- more -->
+	<div class="text-center">
+		<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+			aria-expanded="false" aria-controls="collapseExample">
+			See more
+		</button>
+	</div>
+	<section class="collapse" id="collapseExample">
+		<div class="container">
+			<div class="rfu">
+				<div class="row">
+					<div class="col-lg-2 col-md-4 col-4 pb-md-3 pb-3">
+						<a href="../autithi inside/index.html"> <img src="../static/img/11.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/22.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/44.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/66.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="rfu pt-2">
+				<div class="row">
+					<div class="col-lg-2 col-md-4 col-4 pb-md-3 pb-3">
+						<a href="../autithi inside/index.html"> <img src="../static/img/11.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/22.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/44.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/66.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+					<div class="col-lg-2 col-md-4 col-4">
+						<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+								class="w-100 img-fluid">
+							<h4>Dhaka</h4>
+							<p>100tk/night average</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</section>
+</section>
+
+
+<section id="recommendation">
+	<div class="container pt-5">
+		<h2 class="pb-3 text-center">Dhaka University Hostel</h2>
+		<div class="rfu">
+			<div class="row">
+				<div class="col-lg-2 col-md-4 col-4 pb-md-3 pb-3">
+					<a href="../autithi inside/index.html"> <img src="../static/img/11.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/22.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/44.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/66.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="rfu pt-2">
+			<div class="row">
+				<div class="col-lg-2 col-md-4 col-4 pb-md-3 pb-3">
+					<a href="../autithi inside/index.html"> <img src="../static/img/11.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/22.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/44.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/66.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+				<div class="col-lg-2 col-md-4 col-4">
+					<a href="../autithi inside/index.html"> <img src="../static/img/33.jpg" alt=""
+							class="w-100 img-fluid">
+						<h4>Dhaka</h4>
+						<p>100tk/night average</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Recommendation End -->
+
+<section class="test">
+
+</section>
+
+
+
+{% endblock content %}

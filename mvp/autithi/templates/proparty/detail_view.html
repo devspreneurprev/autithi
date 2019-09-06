@@ -1,0 +1,28 @@
+{% extends "../base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+    <h3>title: "{{ object.title }}"</h3>
+    <h4>host: "{{ object.host }}"</h4>
+    <h4>city: "{{ object.city }}"</h4>
+    <h4>address: "{{ object.address }}"</h4>
+    <h4>description: "{{ object.description }}"</h4>
+    <h4>cost_per_unit: "{{ object.cost_per_unit }}"</h4>
+
+    <h4>house_rules: "{{ object.house_rules }}"</h4>
+    <h4>cancellation_policy: "{{ object.cancellation_policy }}"</h4>
+    <h4>amenities: "{{ object.amenities }}"</h4>
+    <h4>number_of_badrooms: "{{ object.number_of_badrooms }}"</h4>
+    <h4>number_of_bathrooms: "{{ object.number_of_bathrooms }}"</h4>
+    <h4>number_of_guest: "{{ object.number_of_guest }}"</h4>
+    <h4>accommodates: "{{ object.accommodates }}"</h4>
+    <h4>times_viewed: "{{ object.times_viewed }}"</h4>
+    <br><br>
+    {% for image_instance in image_list %}
+    <h4>{{image_instance.caption}}</h4>
+    <h5>image_instance.updated_at</h5>
+    <img src="{{ image_instance.image.url }}" alt="">
+    <br>
+    {% endfor %}
+</div>
+{% endblock content %}
