@@ -1,11 +1,33 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load widget_tweaks %}
 {% block content %}
-<div><br><br><br></div>
-<div class="container body-inner">
-    <form method='POST' action=''>{% csrf_token %}
-        {{ form|crispy }}
-        <input type='submit' value="user"/>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Sign In</h5>
+                    <form class="form-signin" method='POST' action=''>{% csrf_token %}
+                        <div class="form-label-group">
+                            {% render_field form.email|append_attr:"class:form-control" type="email" placeholder="email" %}
+                            <label for="email">email</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            {% render_field form.password|append_attr:"class:form-control" type="password" placeholder="Password" %}
+                            <label for="inputPassword">Password</label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

@@ -26,7 +26,7 @@ from .serializers import (
     PropartyDetailSerializer,
     PropartyImageSerializer,
 )
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsOwnerAndAuth
 from .pagination import (
     PostLimitOffsetPagination,
     PostPageNumberPagination
@@ -70,14 +70,14 @@ class PropertyDeleteAPIView(RetrieveDestroyAPIView):
     queryset = Proparty.objects.all()
     serializer_class = PropartyDetailSerializer
     lookup_field = 'id'
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerAndAuth]
 
 
 class PropertyUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Proparty.objects.all()
     serializer_class = PropartyDetailSerializer
     lookup_field = 'id'
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerAndAuth]
 
 
 class PropartyImageListAPIView(ListAPIView):

@@ -40,13 +40,14 @@ INSTALLED_APPS = [
 
     # third party
     'crispy_forms',
-    
+    'widget_tweaks',
+
     # user app
     'accounts',
     'proparty',
 ]
 
-AUTH_USER_MODEL = 'accounts.User' #changes the built-in user model to ours
+AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
 # LOGIN_URL = '/login/'
 # LOGIN_URL_REDIRECT = '/'
 # LOGOUT_URL = '/logout/'
